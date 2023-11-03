@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
-public class EnemyScriptTEST : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IEnemy
 {
     [SerializeField] private Transform player;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -12,71 +14,91 @@ public class EnemyScriptTEST : MonoBehaviour
     [SerializeField] private float chasingSpeed;
     [SerializeField] private float followDistance;
     [SerializeField] private float attackDistance;
-    [SerializeField] private float interval;
     [SerializeField] private float idleMovementSpeed;
 
     [SerializeField] public bool isFollowing;
-    [SerializeField] public bool isIdle = false;
-    [SerializeField] public bool idleAction = false;
+    [SerializeField] public bool isIdle;
+    [SerializeField] public bool idleAction;
+    [SerializeField] public bool isAttacking;
 
-    private void Start()
+    void Start()
     {
         isIdle = true;
-        Observable.EveryUpdate().Subscribe(_ => 
-        { 
-            SpriteBalance(); 
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            SpriteBalance();
             Flip();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
-        {           
+        {
             Idle();
+            AttackPlayer();
+            FollowPlayer();
         });
     }
-
-    private void SpriteBalance()
+    public void AttackPlayer()
     {
-        if (characterMovement.isJumping && player.position.y < transform.position.y)
+        if (!isAttacking) { return; }
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distanceToPlayer < attackDistance)
         {
-            spriteRenderer.sortingOrder = -10;                  
+            rb2d.velocity = Vector2.zero;
+            //Attack logic...
+            isFollowing = false;
         }
-        else if(characterMovement.isJumping == false)
+
+        if (distanceToPlayer > attackDistance && distanceToPlayer < followDistance)
         {
-            spriteRenderer.sortingOrder = 0;
+            isFollowing = true;
         }
     }
 
-    private void FollowPlayer()
+    public void FollowPlayer()
     {
+        if (!isFollowing) { return; }
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (Vector2.Distance(transform.position, player.position) < followDistance)
+        if (distanceToPlayer < followDistance)
         {
-            isFollowing = true;
-            isIdle = false;
+            isAttacking = false;
             Vector2 direction = (player.position - transform.position).normalized;
-            rb2d.velocity = direction * 1.5f;
+            rb2d.velocity = direction * chasingSpeed;
+        }
+
+        if (distanceToPlayer < attackDistance)
+        {
+            isAttacking = true;
+            isFollowing = false;
         }
 
         else
         {
+            isAttacking = false;
             isFollowing = false;
-            isIdle = true;  
         }
     }
 
-  
-    private void Idle()
+    public void Idle()
     {
-        if (!isIdle && !isFollowing) { return; }
+        if (!isIdle && !isFollowing)
+        {
+            rb2d.velocity = Vector2.zero;
+            return;
+
+        }
+
         if (!idleAction)
         {
             int randomAction = Random.Range(0, 4);
             float delay = 3;
             _ = PerformAction(randomAction, delay);
         }
+
         else
         {
-            FollowPlayer();
+            isFollowing = true;
         }
     }
 
@@ -99,22 +121,23 @@ public class EnemyScriptTEST : MonoBehaviour
         await Task.Delay((int)(delay * 1000));
         idleAction = false;
     }
+
+    private void SpriteBalance()
+    {
+        if (characterMovement.isJumping && player.position.y < transform.position.y)
+        {
+            spriteRenderer.sortingOrder = -10;
+        }
+        else if (characterMovement.isJumping == false)
+        {
+            spriteRenderer.sortingOrder = 0;
+        }
+    }
+
     private void Flip()
     {
         Vector3 scale = transform.localScale;
-        if (player.position != null)
-        {
-            if (player.position.x > transform.position.x)
-            {
-                scale.x = Mathf.Abs(scale.x) * -1;
-            }
-            else if (player.position.x < transform.position.x)
-            {
-                scale.x = Mathf.Abs(scale.x);
-            }
-        }
+        scale.x = Mathf.Abs(scale.x) * -Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = scale;
     }
-
-
 }

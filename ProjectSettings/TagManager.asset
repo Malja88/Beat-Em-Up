@@ -5,11 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - FinalHitBox
-  - HitBox1
-  - HitBox2
-  - HurtBox
-  - HitBox3
+  - PickObject
   layers:
   - Default
   - TransparentFX
@@ -18,8 +14,8 @@ TagManager:
   - Water
   - UI
   - Base
-  - 
-  - 
+  - Player
+  - Weapon
   - 
   - 
   - 
@@ -49,4 +45,7 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 4175052415
+    locked: 0
+  - name: Weapons
+    uniqueID: 4137376799
     locked: 0

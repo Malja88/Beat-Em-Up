@@ -13,7 +13,6 @@ public class CharacherController : MonoBehaviour
     [SerializeField] public float horizontalSpeed;
     [SerializeField] public float verticalSpeed;
     private Vector3 currentVelocity = Vector3.zero;
-    private Vector3 _velocity;
     private bool faceRight = true;
 
     public void Move(float hMove, float vMove)
@@ -45,6 +44,11 @@ public class CharacherController : MonoBehaviour
     public void Jump()
     {
         animator.Play("Jump");
+    }
+
+    public void Punch()
+    {
+        animator.Play("Punch");
     }
 }
 

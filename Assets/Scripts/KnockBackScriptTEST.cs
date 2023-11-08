@@ -14,7 +14,7 @@ public class KnockBackScriptTEST : MonoBehaviour
         { 
             if(_.gameObject.CompareTag("Enemy"))
             {
-                //BeingKnocked();
+                BeingKnocked();
             }
         }) ;
     }

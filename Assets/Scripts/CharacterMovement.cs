@@ -6,16 +6,17 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacherController controller;
     [SerializeField] private KeyCode jumpButton;
+    [SerializeField] private KeyCode punchButton;
     [HideInInspector] public float horizontalMove, verticalMove;
-    [SerializeField] private bool isMoving = true;
+    [SerializeField] private bool isMoving;
     [SerializeField] public bool isJumping;
     private void Start()
     {
-        isJumping = false;
         Observable.EveryUpdate().Subscribe(_ =>
         {
             CharacterMove();
             CharacterJump();
+            CharacterPunch();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
@@ -46,11 +47,21 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterJump()
     {
-        if(Input.GetKey(jumpButton))
+        if (isJumping)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(jumpButton))
         {
             controller.Jump();
         }
     }
 
-
+    private void CharacterPunch()
+    {
+        if(Input.GetKeyDown(punchButton))
+        {
+            controller.Punch();
+        }
+    }
 }

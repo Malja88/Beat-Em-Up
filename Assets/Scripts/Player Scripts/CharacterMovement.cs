@@ -1,4 +1,3 @@
-using System;
 using UniRx;
 using UnityEngine;
 
@@ -8,8 +7,12 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
     [HideInInspector] public float horizontalMove, verticalMove;
-    [SerializeField] private bool isMoving;
+    [SerializeField] public bool isMoving;
     [SerializeField] public bool isJumping;
+    [SerializeField] public bool isAttacking;
+    [SerializeField] public bool isRunning;
+    GlobalStringVariables variables = new GlobalStringVariables();
+
     private void Start()
     {
         Observable.EveryUpdate().Subscribe(_ =>
@@ -17,6 +20,8 @@ public class CharacterMovement : MonoBehaviour
             CharacterMove();
             CharacterJump();
             CharacterPunch();
+            ComboTimer();
+            CharacterRun();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
@@ -30,10 +35,8 @@ public class CharacterMovement : MonoBehaviour
         if (!isMoving)
             return;
 
-        if (isMoving)
-        {
-            horizontalMove = Input.GetAxisRaw("Horizontal");
-            verticalMove = Input.GetAxisRaw("Vertical");
+            horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
+            verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
             //if (Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1)
             //{
             //    animator.SetBool("Walk", true);
@@ -42,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
             //{
             //    animator.SetBool("Walk", false);
             //}
-        }
+        
     }
 
     private void CharacterJump()
@@ -51,7 +54,7 @@ public class CharacterMovement : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(jumpButton))
+        if (Input.GetKeyDown(jumpButton) || Input.GetButtonDown(variables.Jump))
         {
             controller.Jump();
         }
@@ -59,9 +62,31 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterPunch()
     {
-        if(Input.GetKeyDown(punchButton))
+        if (!isAttacking) return;
+        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch))
         {
             controller.Punch();
+        }
+        else if (Input.GetKeyUp(punchButton) || Input.GetButtonUp(variables.Punch))
+        {
+            controller.isHit = false;
+        }
+    }
+
+    private void ComboTimer()
+    {
+        controller.TimerToComboAttack();
+    }
+
+    private void CharacterRun()
+    {
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        {
+            controller.Run();
+        }
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        {
+            controller.DisableRun();
         }
     }
 }

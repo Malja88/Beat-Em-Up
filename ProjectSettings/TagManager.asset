@@ -8,6 +8,7 @@ TagManager:
   - PickObject
   - Pipe
   - WeakAttack
+  - Damage
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Base
   - Player
   - Weapon
-  - 
+  - Enemy
   - 
   - 
   - 

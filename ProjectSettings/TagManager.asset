@@ -9,6 +9,7 @@ TagManager:
   - Pipe
   - WeakAttack
   - Damage
+  - Wall
   layers:
   - Default
   - TransparentFX

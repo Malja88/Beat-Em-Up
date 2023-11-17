@@ -12,16 +12,15 @@ public class PickObjectsTest : MonoBehaviour
     {
         playerCollider.OnTriggerStay2DAsObservable().Subscribe(_ =>
         {
-            if ((Input.GetKey(KeyCode.E) || Input.GetButtonDown("Fire1") && _.gameObject.CompareTag("PickObject")))
+            if ((Input.GetKey(KeyCode.E) && _.gameObject.CompareTag("PickObject")))
             {
                 OnPickUp?.Invoke();
             }
-
         });
 
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            if ((Input.GetKeyUp(KeyCode.K)) || Input.GetButtonDown("Fire2"))
+            if ((Input.GetKeyUp(KeyCode.K)))
             {               
                 ThrowItem?.Invoke();
             }

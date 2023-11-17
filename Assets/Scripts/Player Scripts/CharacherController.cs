@@ -16,23 +16,25 @@ public class CharacherController : MonoBehaviour
     [SerializeField] public bool isHit;
     [SerializeField] private int comboHit;
     [SerializeField] private float comboAttackTimer;
-    private float currentComboAttacTimer;
+    [SerializeField] private float currentComboAttackTimer;
     [SerializeField] public bool timerToResetCombo;
+    [SerializeField] private int timeToPerformFinalBlow;
 
     [Header("Player Moving Speed Settings")]
     [Range(0, 1)]
     [SerializeField] private float moveSmooth;
-    [SerializeField] public float runningSpeed;
-    [SerializeField] private PlayerStats playerStats;
-    private float currentHorizontalSpeed;
+    [SerializeField] private float runningSpeed;
+    [SerializeField] private PlayerStats playerStats;  
+    [SerializeField] private float doubleTapTimeThreshold;
     private Vector3 currentVelocity = Vector3.zero;
     private bool faceRight = true;
     private float lastTapTime = 0f;
-    private float doubleTapTimeThreshold = 0.2f;
+    private float currentHorizontalSpeed;
+
     private void Start()
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
-        currentComboAttacTimer = comboAttackTimer;
+        currentComboAttackTimer = comboAttackTimer;
     }
 
     public void Move(float hMove, float vMove)
@@ -40,18 +42,12 @@ public class CharacherController : MonoBehaviour
         Vector3 targetVelocity = new Vector3(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
         characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);         
 
-        if (hMove > 0 && !faceRight)
-        {
-            Flip();
-        }
-        if (hMove < 0 && faceRight)
+        if (hMove > 0 && !faceRight || hMove < 0 && faceRight)
         {
             Flip();
         }
     }
-    /// <summary>
-    /// Flip player towards controlls
-    /// </summary>
+
     public void Flip()
     {
         faceRight = !faceRight;
@@ -72,7 +68,7 @@ public class CharacherController : MonoBehaviour
         {
             timerToResetCombo = true;
             comboHit++;
-            if (comboHit >= 3)
+            if (comboHit >= timeToPerformFinalBlow)
             {
                 comboHit = 0;
                 animator.Play(variables.PunchFinisherHash);
@@ -85,12 +81,12 @@ public class CharacherController : MonoBehaviour
     public void TimerToComboAttack()
     {
         if (!timerToResetCombo) { return; }
-        currentComboAttacTimer -= Time.deltaTime;
+        currentComboAttackTimer -= Time.deltaTime;
 
-        if (currentComboAttacTimer <= 0)
+        if (currentComboAttackTimer <= 0)
         {
             comboHit = 0;
-            currentComboAttacTimer = comboAttackTimer;
+            currentComboAttackTimer = comboAttackTimer;
             timerToResetCombo = false;
         }
     }

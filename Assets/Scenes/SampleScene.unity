@@ -942,10 +942,13 @@ MonoBehaviour:
   isHit: 0
   comboHit: 0
   comboAttackTimer: 0
+  currentComboAttackTimer: 0
   timerToResetCombo: 0
+  timeToPerformFinalBlow: 0
   moveSmooth: 0
   runningSpeed: 0
   playerStats: {fileID: 0}
+  doubleTapTimeThreshold: 0.2
 --- !u!1 &443952675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,10 +1391,13 @@ MonoBehaviour:
   isHit: 0
   comboHit: 0
   comboAttackTimer: 0
+  currentComboAttackTimer: 0
   timerToResetCombo: 0
+  timeToPerformFinalBlow: 0
   moveSmooth: 0
   runningSpeed: 0
   playerStats: {fileID: 0}
+  doubleTapTimeThreshold: 0.2
 --- !u!61 &624913680
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1524,7 +1530,6 @@ GameObject:
   - component: {fileID: 877075513}
   - component: {fileID: 877075514}
   - component: {fileID: 877075515}
-  - component: {fileID: 877075516}
   m_Layer: 0
   m_Name: Player Sprite
   m_TagString: Untagged
@@ -1636,19 +1641,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 877075513}
   characterMovement: {fileID: 1161089127}
   rigidbody: {fileID: 1161089126}
---- !u!114 &877075516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877075511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f8c95bf4dbc0a6408c463ada602cea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCollider: {fileID: 1161089131}
 --- !u!1 &1112217197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,6 +1760,8 @@ GameObject:
   - component: {fileID: 1161089128}
   - component: {fileID: 1161089127}
   - component: {fileID: 1161089132}
+  - component: {fileID: 1161089133}
+  - component: {fileID: 1161089134}
   - component: {fileID: 1161089126}
   - component: {fileID: 1161089131}
   m_Layer: 7
@@ -1849,10 +1843,13 @@ MonoBehaviour:
   isHit: 0
   comboHit: 0
   comboAttackTimer: 0.5
+  currentComboAttackTimer: 0
   timerToResetCombo: 0
+  timeToPerformFinalBlow: 3
   moveSmooth: 0.113
   runningSpeed: 2
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
+  doubleTapTimeThreshold: 0.2
 --- !u!4 &1161089129
 Transform:
   m_ObjectHideFlags: 0
@@ -1929,6 +1926,35 @@ MonoBehaviour:
   collider: {fileID: 1161089131}
   animator: {fileID: 877075514}
   stats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
+--- !u!114 &1161089133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161089125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8c95bf4dbc0a6408c463ada602cea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1161089131}
+--- !u!114 &1161089134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161089125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735ae4c111bcd5f4799fd378a7c6022a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
+  playerCurrentLevel: 0
+  skillPoints: 0
+  skillPointsToNextLevel: 10
 --- !u!1 &1376619522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,15 +2709,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipe: {fileID: 2035229697}
   shadow: {fileID: 1797164855}
-  weaponBody: {fileID: 2035229698}
-  shadowBody: {fileID: 1797164856}
   player: {fileID: 1161089129}
   playerSpriteAnimation: {fileID: 877075512}
-  characterMovement: {fileID: 1161089127}
+  weaponBody: {fileID: 2035229698}
+  shadowBody: {fileID: 1797164856}
   weaponSpriteRenderer: {fileID: 2035229696}
   shadowSpiteRenderer: {fileID: 1797164854}
-  isThrow: 0
-  isPickUp: 0
+  characterMovement: {fileID: 1161089127}
+  pipeLeftThrowDirection: {x: -3, y: -1}
+  pipeRightThrowDirection: {x: 3, y: -1}
+  shadowLeftThrowDirection: {x: -3, y: 0}
+  shadowRightThrowDirection: {x: 3, y: 0}
+  itemJumpingThrowForce: 2
+  pipeLeftDirection: {x: -3, y: 1}
+  pipeRightDirection: {x: 3, y: 1}
+  shadowLeftDirection: {x: -3, y: 0}
+  shadowRightDirection: {x: 3, y: 0}
+  itemThrowingForce: 4
 --- !u!1 &1833843566
 GameObject:
   m_ObjectHideFlags: 0

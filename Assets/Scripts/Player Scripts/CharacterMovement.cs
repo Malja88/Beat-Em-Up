@@ -37,27 +37,13 @@ public class CharacterMovement : MonoBehaviour
 
             horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
             verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
-            //if (Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1)
-            //{
-            //    animator.SetBool("Walk", true);
-            //}
-            //else
-            //{
-            //    animator.SetBool("Walk", false);
-            //}
-        
+            //animator.SetBool("Walk", Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1);
     }
 
     private void CharacterJump()
     {
-        if (isJumping)
-        {
-            return;
-        }
-        if (Input.GetKeyDown(jumpButton) || Input.GetButtonDown(variables.Jump))
-        {
-            controller.Jump();
-        }
+        if (isJumping || !Input.GetKeyDown(jumpButton) && !Input.GetButtonDown(variables.Jump)) return;
+        controller.Jump();
     }
 
     private void CharacterPunch()

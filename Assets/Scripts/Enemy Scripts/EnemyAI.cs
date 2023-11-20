@@ -70,6 +70,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         else
         {
             isAttacking = false;
+            //isIdle = true;
         }
         //float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 

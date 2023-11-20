@@ -10,6 +10,7 @@ TagManager:
   - WeakAttack
   - Damage
   - Wall
+  - Store
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Weapon
   - Enemy
-  - 
+  - Exit
   - 
   - 
   - 
@@ -47,9 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2738506233
+    locked: 0
   - name: Characters
     uniqueID: 4175052415
     locked: 0
   - name: Weapons
     uniqueID: 4137376799
+    locked: 0
+  - name: UI
+    uniqueID: 2589109849
     locked: 0

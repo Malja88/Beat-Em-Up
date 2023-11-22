@@ -13,7 +13,10 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private float punchRecoilForce;
     [SerializeField] private float stunnedTime;
     [SerializeField] public bool isStunned;
-
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private GameObject skillPointPrefab;
+    [SerializeField] private int coinAmount;
+    [SerializeField] private int skillPoint;
     void Start()
     {
         Observable.EveryUpdate().Subscribe(_ =>
@@ -25,9 +28,14 @@ public class EnemyDamage : MonoBehaviour
         {
             if(_.CompareTag("WeakAttack"))
             {
-                rb2d.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
+                //rb2d.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
                 //enemyAI.isIdle = false;
                 //enemyAI.isAttacking = false;
+                CoinSplash();
+            }
+            if(_.CompareTag("Punch"))
+            {
+                // Доработать!!!
             }
         });
     }
@@ -58,4 +66,12 @@ public class EnemyDamage : MonoBehaviour
     //    }
        
     //}
+
+    private void CoinSplash()
+    {
+        for (int i = 0; i < coinAmount; i++)
+        {
+            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        }      
+    }
 }

@@ -11,6 +11,8 @@ TagManager:
   - Damage
   - Wall
   - Store
+  - Coin
+  - Punch
   layers:
   - Default
   - TransparentFX
@@ -23,9 +25,9 @@ TagManager:
   - Weapon
   - Enemy
   - Exit
-  - 
-  - 
-  - 
+  - Border
+  - Coin
+  - Coin Shadow
   - 
   - 
   - 

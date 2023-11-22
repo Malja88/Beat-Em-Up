@@ -10,4 +10,5 @@ public class PlayerStats : ScriptableObject
     [SerializeField] public int level;
     [SerializeField] public int damage;
     [SerializeField] public float defence;
+    [SerializeField] public float coins;
 }

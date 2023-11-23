@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIArrowManager : MonoBehaviour
 {
-    GlobalStringVariables variables = new GlobalStringVariables();
+    readonly GlobalStringVariables variables = new();
     [SerializeField] private RectTransform rect;
     [SerializeField] private GameObject storeBox;
     [SerializeField] private Rigidbody2D playerRigidbody;

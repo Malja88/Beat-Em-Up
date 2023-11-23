@@ -209,7 +209,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8487394482808872197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -388,12 +388,13 @@ MonoBehaviour:
   randomYStart: 2
   randomYEnd: -9
   smoothSpeed: 1
-  wanderTime: 2
+  wanderTime: 1.5
   coinRb: {fileID: 8488523658166687581}
   bouncePower: 2.5
   randomStart: 2
   randomEnd: 4
   shadowCollider: {fileID: 5461215596218066635}
+  coinCollider: {fileID: 2273976484133092687}
 --- !u!50 &509098656293137843
 Rigidbody2D:
   serializedVersion: 4

@@ -16,7 +16,7 @@ MonoBehaviour:
   horizontalSpeed: 125
   verticalSpeed: 100
   skillPoints: 0
-  level: 1
+  level: 6
   damage: 0
   defence: 0
-  coins: 3.4757752
+  coins: 0

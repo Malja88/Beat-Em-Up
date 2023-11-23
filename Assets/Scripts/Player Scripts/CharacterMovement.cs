@@ -7,11 +7,11 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
     [HideInInspector] public float horizontalMove, verticalMove;
-    [SerializeField] public bool isMoving;
-    [SerializeField] public bool isJumping;
-    [SerializeField] public bool isAttacking;
-    [SerializeField] public bool isRunning;
-    GlobalStringVariables variables = new GlobalStringVariables();
+    public bool isMoving;
+    public bool isJumping;
+    public bool isAttacking;
+    public bool isRunning;
+    readonly GlobalStringVariables variables = new();
 
     private void Start()
     {

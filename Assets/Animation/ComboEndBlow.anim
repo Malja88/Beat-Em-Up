@@ -464,21 +464,21 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.25
-    functionName: comboEndTriggerOn
+    functionName: ComboEndTriggerOn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6666667
-    functionName: comboEndTriggerOff
+    functionName: ComboEndTriggerOff
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.75
-    functionName: isMovingOn
+    functionName: IsMovingOn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

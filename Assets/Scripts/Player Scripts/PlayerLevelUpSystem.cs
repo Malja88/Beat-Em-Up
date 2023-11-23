@@ -7,33 +7,34 @@ using UnityEngine;
 public class PlayerLevelUpSystem : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private int playerCurrentLevel;
-    [SerializeField] private int skillPoints;
-    [SerializeField] private int skillPointsToNextLevel;
+    public int currentSkillPoints;
+    public float skillPointsToNextLevel;
     [SerializeField] private BoxCollider2D playerCollider;
-    private float currentCoinPrice;
+    [SerializeField] private float currentCoinPrice;
     [SerializeField] private TextMeshProUGUI coinText;
+    private void Awake()
+    {
+        currentCoinPrice = Random.Range(0.1f, 2);
+        coinText.text = playerStats.coins.ToShortString(3);
+    }
     void Start()
     {
         playerCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Coin")).Subscribe(_ =>
         {
             playerStats.coins += currentCoinPrice;
+            
         });
 
         Observable.EveryUpdate().Subscribe(_ =>
         {
             coinText.text = playerStats.coins.ToShortString(3);
         });
-
-        currentCoinPrice = Random.Range(0.1f, 2);
-        coinText.text = playerStats.coins.ToShortString(3);
-        playerCurrentLevel = playerStats.level;   
-        skillPoints = playerStats.skillPoints;
     }
+
     public void GainExperience(int amount)
     {
-        skillPoints += amount;
-        if (skillPoints >= skillPointsToNextLevel)
+        currentSkillPoints += amount;
+        if (currentSkillPoints >= skillPointsToNextLevel)
         {
             LevelUp();
         }
@@ -41,8 +42,8 @@ public class PlayerLevelUpSystem : MonoBehaviour
 
     private void LevelUp()
     {
-        playerCurrentLevel++;
-        skillPoints = 0;
-        //skillPointsToNextLevel rise from new level
+        playerStats.level++;
+        currentSkillPoints = 0;
+        skillPointsToNextLevel *= 1.2f;
     }
 }

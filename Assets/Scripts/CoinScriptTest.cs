@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -20,13 +21,16 @@ public class CoinScriptTest : MonoBehaviour
     [SerializeField] private int randomEnd;
 
     [SerializeField] private BoxCollider2D shadowCollider;
+    [SerializeField] private CircleCollider2D coinCollider;
     private Vector3 targetPosition;
     private float timer;
 
     void Start()
     {
         shadowCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall")).Subscribe(x => { smoothSpeed = 0; });
+        coinCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Player")).Subscribe(_ => { Destroy(gameObject); } );
         StartCoroutine(Wander());
+        TurnCoinColliderOn();
     }
 
     IEnumerator Wander()
@@ -48,5 +52,11 @@ public class CoinScriptTest : MonoBehaviour
 
                 yield return null;
             }       
+    }
+
+    private async void TurnCoinColliderOn()
+    {
+        await Task.Delay(1800);
+        coinCollider.enabled = true;
     }
 }

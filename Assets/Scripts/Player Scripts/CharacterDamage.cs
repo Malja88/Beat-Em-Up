@@ -8,7 +8,7 @@ public class CharacterDamage : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerStats stats;
     [SerializeField] private PlayerUITest test;
-    GlobalStringVariables variables = new GlobalStringVariables();
+    readonly GlobalStringVariables variables = new();
     public float currentHealth;
     void Awake()
     {

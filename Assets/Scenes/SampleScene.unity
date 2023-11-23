@@ -305,6 +305,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50613505}
   m_CullTransparentMesh: 1
+--- !u!1 &56161637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56161638}
+  m_Layer: 0
+  m_Name: SkillPoint Flight Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56161638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56161637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12, y: 0.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1125871975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86658267
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,13 +805,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAI: {fileID: 115041860}
+  playerLevelUpSystem: {fileID: 0}
   player: {fileID: 297832104}
+  skillpointStartFlight: {fileID: 0}
   rb2d: {fileID: 115041861}
   characherController: {fileID: 1161089128}
   boxCollider: {fileID: 115041862}
   punchRecoilForce: 0.1
   stunnedTime: 2
-  isStunned: 0
   coinPrefab: {fileID: 0}
   skillPointPrefab: {fileID: 0}
   coinAmount: 0
@@ -2750,7 +2782,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 78.06714, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.20272827, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3243,17 +3275,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAI: {fileID: 1125871972}
+  playerLevelUpSystem: {fileID: 1161089134}
   player: {fileID: 297832104}
+  skillpointStartFlight: {fileID: 56161638}
   rb2d: {fileID: 1125871973}
   characherController: {fileID: 1161089128}
   boxCollider: {fileID: 1125871974}
-  punchRecoilForce: 0.1
+  punchRecoilForce: 0.2
   stunnedTime: 2
-  isStunned: 0
   coinPrefab: {fileID: 8588110643872551415, guid: fb8a229f24a503c43a03a81f56103a4d, type: 3}
   skillPointPrefab: {fileID: 7868008315413214474, guid: 4b5e77123f2788b479c8443eee8260b4, type: 3}
   coinAmount: 1
-  skillPoint: 0
+  skillPoint: 10
 --- !u!114 &1125871972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3289,7 +3322,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -3358,11 +3391,12 @@ Transform:
   m_GameObject: {fileID: 1125871970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: -2.42, z: 0}
+  m_LocalPosition: {x: 7.57, y: -2.42, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 403486280}
+  - {fileID: 56161638}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1161089125
@@ -3457,7 +3491,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   hitRayDistance: 3
-  overlapBoxSize: {x: 2.2, y: 0.1}
+  overlapBoxSize: {x: 2.5, y: 0.1}
   isHit: 0
   comboHit: 0
   comboAttackTimer: 0.5
@@ -3572,10 +3606,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
-  playerCurrentLevel: 0
-  skillPoints: 0
-  skillPointsToNextLevel: 10
+  currentSkillPoints: 0
+  skillPointsToNextLevel: 100
   playerCollider: {fileID: 1161089131}
+  currentCoinPrice: 0
   coinText: {fileID: 847502756}
 --- !u!114 &1161089135
 MonoBehaviour:
@@ -4712,9 +4746,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef071c6257a167d43bb45dca67ebb20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 2057969230}
+  healthSlider: {fileID: 2057969230}
+  skillSlider: {fileID: 2002620641}
   character: {fileID: 1161089132}
-  image: {fileID: 475057320}
+  playerLevelUpSystem: {fileID: 1161089134}
 --- !u!1 &1797164852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,7 +4769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1797164853
 BoxCollider2D:
   m_ObjectHideFlags: 0

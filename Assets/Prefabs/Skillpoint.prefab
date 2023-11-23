@@ -65,9 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc29de492875d4b4d8fa602d912db2da, type: 2}
   m_sharedMaterial: {fileID: -7470241632979586545, guid: bc29de492875d4b4d8fa602d912db2da, type: 2}
@@ -224,6 +222,7 @@ GameObject:
   - component: {fileID: 6036960559788446512}
   - component: {fileID: 3594872568907642284}
   - component: {fileID: 5743873175032796216}
+  - component: {fileID: 7273445469718501839}
   m_Layer: 5
   m_Name: Skillpoint
   m_TagString: Untagged
@@ -268,7 +267,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1705857447
@@ -296,7 +295,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5743873175032796216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,3 +313,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7273445469718501839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868008315413214474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa65872e6f5d9284696997a46bcf57fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamage: {fileID: 0}
+  numberText: {fileID: 3034870742677294514}

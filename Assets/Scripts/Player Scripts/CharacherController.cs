@@ -5,7 +5,7 @@ public class CharacherController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D characterRigidBody;
     [SerializeField] private Animator animator;
-    GlobalStringVariables variables = new GlobalStringVariables();
+    readonly GlobalStringVariables variables = new();
     [SerializeField] private CharacterMovement movement;
 
     [Header("Player Attack Settings")]
@@ -13,11 +13,11 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float hitRayDistance;
     [SerializeField] private Vector2 overlapBoxSize;
-    [SerializeField] public bool isHit;
+    public bool isHit;
     [SerializeField] private int comboHit;
     [SerializeField] private float comboAttackTimer;
     [SerializeField] private float currentComboAttackTimer;
-    [SerializeField] public bool timerToResetCombo;
+    [SerializeField] private bool timerToResetCombo;
     [SerializeField] private int timeToPerformFinalBlow;
 
     [Header("Player Moving Speed Settings")]
@@ -39,7 +39,7 @@ public class CharacherController : MonoBehaviour
 
     public void Move(float hMove, float vMove)
     {
-        Vector3 targetVelocity = new Vector3(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
+        Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
         characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);         
 
         if (hMove > 0 && !faceRight || hMove < 0 && faceRight)

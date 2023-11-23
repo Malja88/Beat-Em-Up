@@ -12,10 +12,10 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     [SerializeField] private float idleMovementSpeed;
     [SerializeField] private float stunnedTime;
 
-    [SerializeField] public bool isIdle;
-    [SerializeField] public bool idleAction;
-    [SerializeField] public bool isAttacking;
-    [SerializeField] public bool canAttack;
+    public bool isIdle;
+    public bool idleAction;
+    public bool isAttacking;
+    public bool canAttack;
 
     void Start()
     {

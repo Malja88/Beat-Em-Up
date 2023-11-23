@@ -36,19 +36,19 @@ public class PlayerAnimationEvents : MonoBehaviour
         punchTrigger.enabled = true;
     }
 
-    public void isMovingOn()
+    public void IsMovingOn()
     {
         characterMovement.isMoving = true;
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
         punchTrigger.enabled = false ;
     }
 
-    public void comboEndTriggerOn()
+    public void ComboEndTriggerOn()
     {
         comboEndTrigger.enabled = true;
     }
 
-    public void comboEndTriggerOff()
+    public void ComboEndTriggerOff()
     {
         comboEndTrigger.enabled = false;
     }

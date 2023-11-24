@@ -40,8 +40,15 @@ public class EnemyDamage : MonoBehaviour
             {
                 playerLevelUpSystem.GainExperience(skillPoint);
                 Instantiate(skillPointPrefab, skillpointStartFlight.position, Quaternion.identity);
-                KnockBackAsync();
-               
+                KnockBackAsync();            
+            }
+        });
+
+        boxCollider.OnCollisionEnter2DAsObservable().Subscribe(_ => 
+        {
+            if (_.gameObject.CompareTag("Pipe"))
+            {
+                rb2d.velocity = Vector2.zero;
             }
         });
     }

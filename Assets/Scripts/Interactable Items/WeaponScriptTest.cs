@@ -1,6 +1,4 @@
-using DG.Tweening;
 using System.Threading.Tasks;
-using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -10,7 +8,6 @@ public class WeaponScriptTest : MonoBehaviour
     [SerializeField] private Transform pipe, shadow, player, playerSpriteAnimation;
     [SerializeField] private Rigidbody2D weaponBody, shadowBody;
     [SerializeField] private BoxCollider2D shadowCollider;
-    [SerializeField] private BoxCollider2D pipeCollider;
     [SerializeField] private SpriteRenderer weaponSpriteRenderer, shadowSpiteRenderer;
     [SerializeField] private CharacterMovement characterMovement;
 
@@ -30,18 +27,26 @@ public class WeaponScriptTest : MonoBehaviour
         isSpriteOrder = isPickUp = isJumpingThrow = true;
 
         PickObjectsTest.ThrowItem += ThrowObject;
-        PickObjectsTest.OnPickUp += PickUp;
+
 
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            Stay();
+            //Stay();
             SpriteBalance();
             JumpWithWeapon();
         });
 
         shadowCollider.OnCollisionEnter2DAsObservable().Subscribe(_ =>
         {
+            if(_.gameObject.CompareTag("Pipe"))
+            {
+                weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Static;
+            }
+            else
+            {
                 ApplyRecoil();
+            }
+                             
         });
     }
 
@@ -79,7 +84,7 @@ public class WeaponScriptTest : MonoBehaviour
         isThrow = isJumpingWithWeapon = true;
         isSpriteOrder = isPickUp = false;
         weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Kinematic;
-       weaponSpriteRenderer.enabled = false ;
+        weaponSpriteRenderer.enabled = false ;
         pipe.SetParent(player);
         shadow.SetParent(player);
         weaponSpriteRenderer.sortingOrder = 1;
@@ -94,7 +99,7 @@ public class WeaponScriptTest : MonoBehaviour
     {
          if (!isThrow) { return; }
         shadowSpiteRenderer.enabled = true;
-       weaponSpriteRenderer.enabled = true;
+        weaponSpriteRenderer.enabled = true;
         isPickUp = true;
         isJumpingWithWeapon = isThrow = false;
         isSpriteOrder = isPickUp =true;

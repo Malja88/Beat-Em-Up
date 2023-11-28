@@ -3,7 +3,6 @@ using UnityEngine;
 public class ObstacleSpriteBalance : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer obstacleSpriteRenderer;
-    [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private Transform player;
     void Start()
     {

@@ -82,39 +82,39 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5039087401217517507}
-    m_Position: {x: 30, y: 210, z: 0}
+    m_Position: {x: 520, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -503785694194696488}
-    m_Position: {x: 30, y: 270, z: 0}
+    m_Position: {x: 520, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7054488954842678408}
-    m_Position: {x: 30, y: 340, z: 0}
+    m_Position: {x: 520, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1397294488454050856}
-    m_Position: {x: 250, y: 340, z: 0}
+    m_Position: {x: 740, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7044342477161044774}
-    m_Position: {x: -200, y: 270, z: 0}
+    m_Position: {x: 290, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8687414907832880054}
-    m_Position: {x: -200, y: 320, z: 0}
+    m_Position: {x: 290, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -236577046961956407}
-    m_Position: {x: -200, y: 370, z: 0}
+    m_Position: {x: 290, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1838060246310251409}
-    m_Position: {x: -200, y: 220, z: 0}
+    m_Position: {x: 290, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 626194439694629686}
-    m_Position: {x: -200, y: 170, z: 0}
+    m_Position: {x: 290, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -140, y: 70, z: 0}
-  m_EntryPosition: {x: 40, y: 70, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_AnyStatePosition: {x: 350, y: 220, z: 0}
+  m_EntryPosition: {x: 530, y: 220, z: 0}
+  m_ExitPosition: {x: 700, y: 220, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -503785694194696488}
 --- !u!1101 &-5578469511815488542
@@ -309,13 +309,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WeaponIdle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

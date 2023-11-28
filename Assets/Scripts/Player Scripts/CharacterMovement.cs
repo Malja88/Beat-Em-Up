@@ -4,13 +4,16 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacherController controller;
+    [SerializeField] private WeaponScriptTest weaponScript;
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
+    [SerializeField] private KeyCode kickButton;
     [HideInInspector] public float horizontalMove, verticalMove;
     public bool isMoving;
     public bool isJumping;
     public bool isAttacking;
     public bool isRunning;
+    public bool isAttackingWithWeapon;
     readonly GlobalStringVariables variables = new();
 
     private void Start()
@@ -22,6 +25,8 @@ public class CharacterMovement : MonoBehaviour
             CharacterPunch();
             ComboTimer();
             CharacterRun();
+            CharacterItemPunch();
+            CharacterKick();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
@@ -59,6 +64,19 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private void CharacterKick()
+    {
+        if (!isAttacking) return;
+        if (Input.GetKeyDown(kickButton) || Input.GetButtonDown(variables.Kick))
+        {
+            controller.Kick();
+        }
+        else if (Input.GetKeyUp(kickButton) || Input.GetButtonUp(variables.Kick))
+        {
+            controller.isHit = false;
+        }
+    }
+
     private void ComboTimer()
     {
         controller.TimerToComboAttack();
@@ -73,6 +91,15 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
         {
             controller.DisableRun();
+        }
+    }
+
+    private void CharacterItemPunch()
+    {
+        if (!isAttackingWithWeapon) return;
+        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch) && !weaponScript.isPickUp)
+        {
+            controller.ItemPunch();
         }
     }
 }

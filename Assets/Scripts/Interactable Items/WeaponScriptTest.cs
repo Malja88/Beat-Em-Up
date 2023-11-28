@@ -21,12 +21,13 @@ public class WeaponScriptTest : MonoBehaviour
     [Header("Throwing Item Settings, while walking")]
     [SerializeField] private Vector2 pipeLeftDirection, pipeRightDirection, shadowLeftDirection, shadowRightDirection;
     [SerializeField] private float itemThrowingForce;
+    [SerializeField] private float recoilPower;
 
-    private bool isSpriteOrder, isThrow, isJumpingThrow, isPickUp, isJumpingWithWeapon;
+    public bool isSpriteOrder, isThrow, isJumpingThrow, isPickUp, isJumpingWithWeapon;
 
     private void Start()
     {
-        isSpriteOrder = isThrow = isPickUp = isJumpingThrow = true;
+        isSpriteOrder = isPickUp = isJumpingThrow = true;
 
         PickObjectsTest.ThrowItem += ThrowObject;
         PickObjectsTest.OnPickUp += PickUp;
@@ -40,11 +41,7 @@ public class WeaponScriptTest : MonoBehaviour
 
         shadowCollider.OnCollisionEnter2DAsObservable().Subscribe(_ =>
         {
-            if(_.gameObject.CompareTag("Enemy") || _.gameObject.CompareTag("Wall") || _.gameObject.CompareTag("Obstacle"))
-            {
                 ApplyRecoil();
-            }
-
         });
     }
 
@@ -59,11 +56,13 @@ public class WeaponScriptTest : MonoBehaviour
         {
             pipe.SetParent(player);
             isJumpingThrow = true;
+            isThrow = true;
             pipe.localPosition = new Vector2(1.4f, 2.56f);
         }
         if (Input.GetKeyDown(KeyCode.K) && characterMovement.isJumping)
         {
             if(!isJumpingThrow) { return; }
+            weaponSpriteRenderer.enabled = true;
             isJumpingThrow = isJumpingWithWeapon = false;
             isPickUp = isSpriteOrder = true;
             shadowSpiteRenderer.enabled = true;
@@ -80,6 +79,7 @@ public class WeaponScriptTest : MonoBehaviour
         isThrow = isJumpingWithWeapon = true;
         isSpriteOrder = isPickUp = false;
         weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Kinematic;
+       weaponSpriteRenderer.enabled = false ;
         pipe.SetParent(player);
         shadow.SetParent(player);
         weaponSpriteRenderer.sortingOrder = 1;
@@ -94,6 +94,8 @@ public class WeaponScriptTest : MonoBehaviour
     {
          if (!isThrow) { return; }
         shadowSpiteRenderer.enabled = true;
+       weaponSpriteRenderer.enabled = true;
+        isPickUp = true;
         isJumpingWithWeapon = isThrow = false;
         isSpriteOrder = isPickUp =true;
         transform.SetParent(null);
@@ -148,12 +150,23 @@ public class WeaponScriptTest : MonoBehaviour
     }
 
     private async void ApplyRecoil()
-    {
-        var recoilPos = new Vector2(-0.5f, 0);
-        shadowBody.velocity = weaponBody.velocity = recoilPos;
-        pipe.position = new Vector2(transform.position.x, pipe.position.y);
-        await Task.Delay(400);
-        shadowBody.velocity = weaponBody.velocity = Vector2.zero;
-        /// Make it work by Axises
+    {    
+        if(player.rotation.y > 0 && !isThrow)
+        {
+            var recoilPos = new Vector2(-recoilPower, 0);
+            shadowBody.velocity = weaponBody.velocity = recoilPos;
+            pipe.position = new Vector2(transform.position.x, pipe.position.y);
+            await Task.Delay(400);
+            shadowBody.velocity = weaponBody.velocity = Vector2.zero;
+        }
+
+        else
+        {
+            var recoilPos = new Vector2(recoilPower, 0);
+            shadowBody.velocity = weaponBody.velocity = recoilPos;
+            pipe.position = new Vector2(transform.position.x, pipe.position.y);
+            await Task.Delay(400);
+            shadowBody.velocity = weaponBody.velocity = Vector2.zero;
+        }
     }
 }

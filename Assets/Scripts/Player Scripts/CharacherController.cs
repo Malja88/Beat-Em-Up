@@ -78,6 +78,25 @@ public class CharacherController : MonoBehaviour
         }
     }
 
+    public void Kick()
+    {
+        animator.Play(variables.KickHash);
+        isHit = Physics2D.OverlapBox(rayPunch.position, overlapBoxSize, 0, layerMask);
+
+        if (isHit)
+        {
+            timerToResetCombo = true;
+            comboHit++;
+            if (comboHit >= timeToPerformFinalBlow)
+            {
+                comboHit = 0;
+               // animator.Play(variables.PunchFinisherHash);
+                isHit = false;
+            }
+
+        }
+    }
+
     public void TimerToComboAttack()
     {
         if (!timerToResetCombo) { return; }
@@ -109,5 +128,10 @@ public class CharacherController : MonoBehaviour
         movement.isRunning = false;
     }
    
+    public void ItemPunch()
+    {
+        animator.Play(variables.ItemHitHash);
+        movement.isAttacking = false;
+    }
 }
 

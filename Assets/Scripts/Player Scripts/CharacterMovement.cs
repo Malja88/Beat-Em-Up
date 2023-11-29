@@ -5,6 +5,7 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacherController controller;
     [SerializeField] private WeaponScriptTest weaponScript;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
     [SerializeField] private KeyCode kickButton;
@@ -18,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
+
         Observable.EveryUpdate().Subscribe(_ =>
         {
             CharacterMove();
@@ -27,11 +29,7 @@ public class CharacterMovement : MonoBehaviour
             CharacterRun();
             CharacterItemPunch();
             CharacterKick();
-        });
-
-        Observable.EveryFixedUpdate().Subscribe(_ =>
-        {
-            controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
+            DynamicSpriteRender();
         });
     }
 
@@ -39,10 +37,10 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!isMoving)
             return;
-
-            horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
-            verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
-            //animator.SetBool("Walk", Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1);
+        horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
+        verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
+        controller.Move(horizontalMove * Time.deltaTime, verticalMove * Time.deltaTime);
+        //animator.SetBool("Walk", Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1);
     }
 
     private void CharacterJump()
@@ -101,5 +99,10 @@ public class CharacterMovement : MonoBehaviour
         {
             controller.ItemPunch();
         }
+    }
+
+    private void DynamicSpriteRender()
+    {
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 }

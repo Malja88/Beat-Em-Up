@@ -39,8 +39,12 @@ public class CharacherController : MonoBehaviour
 
     public void Move(float hMove, float vMove)
     {
-        Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
-        characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);         
+        //Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
+        //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);         
+
+        Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
+        Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
 
         if (hMove > 0 && !faceRight || hMove < 0 && faceRight)
         {
@@ -56,7 +60,7 @@ public class CharacherController : MonoBehaviour
 
     public void Jump()
     {
-        animator.Play(variables.Jump);
+        animator.Play(variables.JumpHash);
     }
 
     public void Punch()
@@ -90,7 +94,7 @@ public class CharacherController : MonoBehaviour
             if (comboHit >= timeToPerformFinalBlow)
             {
                 comboHit = 0;
-               // animator.Play(variables.PunchFinisherHash);
+                animator.Play(variables.KickFinisherHash);
                 isHit = false;
             }
 

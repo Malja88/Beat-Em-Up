@@ -21,8 +21,9 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     {
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            SpriteBalance();
+           // SpriteBalance();
             Flip();
+            DynamicSpriteRender();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
@@ -123,5 +124,10 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         rb2d.velocity = Vector2.zero;
         await Task.Delay((int)(delay * 1000));
         idleAction = false;
+    }
+
+    private void DynamicSpriteRender()
+    {
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 }

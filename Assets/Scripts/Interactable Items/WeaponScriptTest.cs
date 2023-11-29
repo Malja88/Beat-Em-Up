@@ -32,8 +32,9 @@ public class WeaponScriptTest : MonoBehaviour
         Observable.EveryUpdate().Subscribe(_ =>
         {
             //Stay();
-            SpriteBalance();
+            //SpriteBalance();
             JumpWithWeapon();
+            DynamicSpriteBalance();
         });
 
         shadowCollider.OnCollisionEnter2DAsObservable().Subscribe(_ =>
@@ -92,7 +93,7 @@ public class WeaponScriptTest : MonoBehaviour
         shadowCollider.enabled = false;
         pipe.localPosition = new Vector2(1.4f, 2.56f);
         shadow.transform.localPosition = new Vector2(1.4f, 0);
-        FlipWeapon();
+        //FlipWeapon();
     }
 
     public void ThrowObject()
@@ -110,33 +111,33 @@ public class WeaponScriptTest : MonoBehaviour
     }
 
 
-    private void Stay()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask("Base"));
+    //private void Stay()
+    //{
+    //    RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask("Base"));
 
-        if (hit.collider != null)
-        {
-            weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Static;
-        }
-    }
+    //    if (hit.collider != null)
+    //    {
+    //        weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Static;
+    //    }
+    //}
 
-    private void FlipWeapon()
-    {
-        if (transform.position.x < pipe.transform.localPosition.x && transform.rotation == Quaternion.Euler(0, 0, 0))
-        {
-            pipe.transform.Rotate(0, 0, 0);
-        }
-        else if (transform.position.x > pipe.transform.localPosition.x && transform.rotation == Quaternion.Euler(0, -180, 0))
-        {
-            pipe.transform.Rotate(0, 180, 0);
-        }
-    }
+    //private void FlipWeapon()
+    //{
+    //    if (transform.position.x < pipe.transform.localPosition.x && transform.rotation == Quaternion.Euler(0, 0, 0))
+    //    {
+    //        pipe.transform.Rotate(0, 0, 0);
+    //    }
+    //    else if (transform.position.x > pipe.transform.localPosition.x && transform.rotation == Quaternion.Euler(0, -180, 0))
+    //    {
+    //        pipe.transform.Rotate(0, 180, 0);
+    //    }
+    //}
 
-    private void SpriteBalance()
-    {
-        if (!isSpriteOrder) return;
-        weaponSpriteRenderer.sortingOrder = characterMovement.isJumping && player.position.y < transform.position.y ? -10 : 0;
-    }
+    //private void SpriteBalance()
+    //{
+    //    if (!isSpriteOrder) return;
+    //    weaponSpriteRenderer.sortingOrder = characterMovement.isJumping && player.position.y < transform.position.y ? -10 : 0;
+    //}
 
     private void ThrowWeaponDirection(Vector2 pipeThrowDirection, Vector2 shadowThrowDirection, Vector2 pipeThrowDirection2, Vector2 shadowThrowDirection2, float throwForce)
     {
@@ -173,5 +174,10 @@ public class WeaponScriptTest : MonoBehaviour
             await Task.Delay(400);
             shadowBody.velocity = weaponBody.velocity = Vector2.zero;
         }
+    }
+
+    private void DynamicSpriteBalance()
+    {
+        weaponSpriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 }

@@ -3,13 +3,15 @@ using UnityEngine;
 public class GlobalStringVariables
 {
     #region Animation Hashes
-    public int PunchHash = Animator.StringToHash("Punch");
-    public int PunchFinisherHash = Animator.StringToHash("ComboEndBlow");
-    public int RunHash = Animator.StringToHash("Run");
-    public int HurtHash = Animator.StringToHash("PlayerHurt");
+    public int PunchHash = Animator.StringToHash("Player Punch");
+    public int PunchFinisherHash = Animator.StringToHash("Punch End Blow");
+    public int RunHash = Animator.StringToHash("PlayerRun");
+    public int HurtHash = Animator.StringToHash("Player Hurt");
     public int ItemHitHash = Animator.StringToHash("ItemHit");
-    public int IdleWithWeapon = Animator.StringToHash("WeaponIdle");
-    public int KickHash = Animator.StringToHash("Kick");
+    public int IdleWithWeapon = Animator.StringToHash("PlayerIdleWithWeapon");
+    public int KickHash = Animator.StringToHash("Player Kick");
+    public int JumpHash = Animator.StringToHash("Player Jump");
+    public int KickFinisherHash = Animator.StringToHash("Kick End Blow");
     #endregion
 
     #region Input Hashes

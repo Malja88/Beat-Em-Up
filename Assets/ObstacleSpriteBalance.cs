@@ -1,16 +1,35 @@
-using UniRx;
+using System;
 using UnityEngine;
-public class ObstacleSpriteBalance : MonoBehaviour
+using UniRx;
+
+public class ObstacleSpriteBalance : MonoBehaviour, IDisposable
 {
-    [SerializeField] private SpriteRenderer obstacleSpriteRenderer;
-    [SerializeField] private Transform player;
+    private SpriteRenderer obstacleSpriteRenderer;
+    private IDisposable updateSubscription;
+
     void Start()
     {
-        Observable.EveryUpdate().Subscribe(_ => { SpriteBalance(); });
+        obstacleSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Subscribe to EveryUpdate with TakeUntilDestroy
+        updateSubscription = Observable.EveryUpdate()
+            .TakeUntilDestroy(this)
+            .Subscribe(_ => { SpriteBalance(); });
     }
 
     private void SpriteBalance()
     {
-        obstacleSpriteRenderer.sortingOrder = player.position.y > transform.position.y ? 1 : 0;
+        // Check if the obstacleSpriteRenderer is null before accessing
+        if (obstacleSpriteRenderer != null)
+        {
+            obstacleSpriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
+        }
+    }
+
+    // Implement IDisposable to properly dispose of the subscription
+    public void Dispose()
+    {
+        // Dispose of the subscription
+        updateSubscription?.Dispose();
     }
 }

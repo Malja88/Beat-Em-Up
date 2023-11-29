@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private CharacterMovement characterMovement;
-    [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private BoxCollider2D comboEndTrigger;
     [SerializeField] private BoxCollider2D punchTrigger;
-    [SerializeField] private SpriteRenderer weaponSpriteRenderer;
     public void StayInFrontWhileJumping()
     {
         characterMovement.isJumping = true;
@@ -34,14 +31,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void IsMovingOff()
     {
-        characterMovement.isMoving = false;
-        rigidbody.bodyType = RigidbodyType2D.Static;     
+        characterMovement.isMoving = false;  
     }
 
     public void IsMovingOn()
     {
         characterMovement.isMoving = true;
-        rigidbody.bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void ComboEndTriggerOn()
@@ -54,15 +49,15 @@ public class PlayerAnimationEvents : MonoBehaviour
         comboEndTrigger.enabled = false;
     }
 
-    public void HideWeapon()
-    {
-        weaponSpriteRenderer.enabled = false;
-    }
+    //public void HideWeapon()
+    //{
+    //    weaponSpriteRenderer.enabled = false;
+    //}
 
-    public void ShowWeapon()
-    {
-        weaponSpriteRenderer.enabled = true;    
-    }
+    //public void ShowWeapon()
+    //{
+    //    weaponSpriteRenderer.enabled = true;    
+    //}
 
     public void PunchTriggerOn()
     {

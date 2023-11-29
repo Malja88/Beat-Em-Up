@@ -13,7 +13,7 @@ public class CoinScriptTest : MonoBehaviour
     [SerializeField] private int randomYEnd;
     [SerializeField] private float smoothSpeed;
     [SerializeField] private float wanderTime;
-    
+
     [Header("Coin Bounceness Settings")]
     [SerializeField] private Rigidbody2D coinRb;
     [SerializeField] private float bouncePower;
@@ -27,7 +27,7 @@ public class CoinScriptTest : MonoBehaviour
 
     void Start()
     {
-        shadowCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall")).Subscribe(x => { smoothSpeed = 0; });
+        shadowCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall") || x.gameObject.CompareTag("Obstacle")).Subscribe(x => { smoothSpeed = 0; });
         coinCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Player")).Subscribe(_ => { Destroy(gameObject); } );
         StartCoroutine(Wander());
         TurnCoinColliderOn();
@@ -56,7 +56,13 @@ public class CoinScriptTest : MonoBehaviour
 
     private async void TurnCoinColliderOn()
     {
-        await Task.Delay(1800);
-        coinCollider.enabled = true;
+        if (this != null)
+        {
+            await Task.Delay(1500);
+            if (coinCollider != null)
+            {
+                coinCollider.enabled = true;
+            }
+        }
     }
 }

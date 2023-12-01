@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private CharacherController controller;
     [SerializeField] private WeaponScriptTest weaponScript;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private PickObjectsTest pickObjectsTest;
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
     [SerializeField] private KeyCode kickButton;
@@ -15,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isAttacking;
     public bool isRunning;
     public bool isAttackingWithWeapon;
+    public bool isRunningWithWeapon;
     readonly GlobalStringVariables variables = new();
 
     private void Start()
@@ -30,6 +32,7 @@ public class CharacterMovement : MonoBehaviour
             CharacterItemPunch();
             CharacterKick();
             DynamicSpriteRender();
+            CharacterRunWithWeapon();
         });
     }
 
@@ -39,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
             return;
         horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
         verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
-        controller.Move(horizontalMove * Time.deltaTime, verticalMove * Time.deltaTime);
+        controller.Move(horizontalMove, verticalMove);
         //animator.SetBool("Walk", Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1);
     }
 
@@ -82,6 +85,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterRun()
     {
+        if(!isRunning) { return; }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
         {
             controller.Run();
@@ -89,6 +93,19 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
         {
             controller.DisableRun();
+        }
+    }
+
+    private void CharacterRunWithWeapon()
+    {
+        if (!isRunningWithWeapon) return;
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        {
+            controller.RunWithWeapon();
+        }
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        {
+            controller.DisableRunWithWeapon();
         }
     }
 

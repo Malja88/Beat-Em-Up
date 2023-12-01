@@ -7,9 +7,10 @@ public class WeaponScriptTest : MonoBehaviour
 {
     [SerializeField] private Transform pipe, shadow, player, playerSpriteAnimation;
     [SerializeField] private Rigidbody2D weaponBody, shadowBody;
-    [SerializeField] private BoxCollider2D shadowCollider;
+    [SerializeField] private BoxCollider2D shadowCollider, damageCollider;
     [SerializeField] private SpriteRenderer weaponSpriteRenderer, shadowSpiteRenderer;
     [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private Vector2 pipePositionOnPlayer, shadowPositionOnPlayer;
 
     [Header("Throwing Item Settings, while jumping")]
     [SerializeField] private Vector2 pipeLeftThrowDirection, pipeRightThrowDirection, shadowLeftThrowDirection, shadowRightThrowDirection;
@@ -31,8 +32,7 @@ public class WeaponScriptTest : MonoBehaviour
 
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            //Stay();
-            //SpriteBalance();
+            Stay();
             JumpWithWeapon();
             DynamicSpriteBalance();
         });
@@ -49,6 +49,11 @@ public class WeaponScriptTest : MonoBehaviour
             }
                              
         });
+
+        damageCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Enemy")).Subscribe(x =>
+        {
+            ApplyRecoil();
+        });
     }
 
     private void JumpWithWeapon()
@@ -63,7 +68,7 @@ public class WeaponScriptTest : MonoBehaviour
             pipe.SetParent(player);
             isJumpingThrow = true;
             isThrow = true;
-            pipe.localPosition = new Vector2(1.4f, 2.56f);
+            pipe.localPosition = pipePositionOnPlayer;
         }
         if (Input.GetKeyDown(KeyCode.K) && characterMovement.isJumping)
         {
@@ -73,6 +78,7 @@ public class WeaponScriptTest : MonoBehaviour
             isPickUp = isSpriteOrder = true;
             shadowSpiteRenderer.enabled = true;
             shadowCollider.enabled = true;
+            damageCollider.enabled = true;
             transform.SetParent(null);
             pipe.SetParent(shadow);
             ThrowWeaponDirection(pipeLeftThrowDirection, shadowLeftThrowDirection, pipeRightThrowDirection, shadowRightThrowDirection, itemJumpingThrowForce);
@@ -91,8 +97,8 @@ public class WeaponScriptTest : MonoBehaviour
         weaponSpriteRenderer.sortingOrder = 1;
         shadowSpiteRenderer.enabled = false;
         shadowCollider.enabled = false;
-        pipe.localPosition = new Vector2(1.4f, 2.56f);
-        shadow.transform.localPosition = new Vector2(1.4f, 0);
+        pipe.localPosition = pipePositionOnPlayer;
+        shadow.transform.localPosition = shadowPositionOnPlayer;
         //FlipWeapon();
     }
 
@@ -107,19 +113,20 @@ public class WeaponScriptTest : MonoBehaviour
         transform.SetParent(null);
         pipe.SetParent(shadow);
         shadowCollider.enabled = true;
+        damageCollider.enabled = true;
         ThrowWeaponDirection(pipeLeftDirection, shadowLeftDirection, pipeRightDirection, shadowRightDirection, itemThrowingForce);
     }
 
 
-    //private void Stay()
-    //{
-    //    RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask("Base"));
+    private void Stay()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask("Base"));
 
-    //    if (hit.collider != null)
-    //    {
-    //        weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Static;
-    //    }
-    //}
+        if (hit.collider != null)
+        {
+            damageCollider.enabled = false;
+        }
+    }
 
     //private void FlipWeapon()
     //{

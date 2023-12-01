@@ -9,16 +9,17 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private CharacterMovement movement;
 
     [Header("Player Attack Settings")]
+    [SerializeField] private Vector2 overlapBoxSize;
     [SerializeField] private Transform rayPunch;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private float hitRayDistance;
-    [SerializeField] private Vector2 overlapBoxSize;
-    public bool isHit;
+    [SerializeField] private int timeToPerformFinalBlow;
     [SerializeField] private int comboHit;
     [SerializeField] private float comboAttackTimer;
     [SerializeField] private float currentComboAttackTimer;
+    [SerializeField] private float hitRayDistance;
     [SerializeField] private bool timerToResetCombo;
-    [SerializeField] private int timeToPerformFinalBlow;
+    [SerializeField] public bool isHit;
+ 
 
     [Header("Player Moving Speed Settings")]
     [Range(0, 1)]
@@ -26,15 +27,18 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private float runningSpeed;
     [SerializeField] private PlayerStats playerStats;  
     [SerializeField] private float doubleTapTimeThreshold;
+    [SerializeField] private float doubleTapTimeRunThreshold;
     private Vector3 currentVelocity = Vector3.zero;
     private bool faceRight = true;
     private float lastTapTime = 0f;
+    private float lastTapRunTime = 0f;
     private float currentHorizontalSpeed;
 
     private void Start()
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
         currentComboAttackTimer = comboAttackTimer;
+
     }
 
     public void Move(float hMove, float vMove)
@@ -45,7 +49,6 @@ public class CharacherController : MonoBehaviour
         Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
-
         if (hMove > 0 && !faceRight || hMove < 0 && faceRight)
         {
             Flip();
@@ -67,7 +70,6 @@ public class CharacherController : MonoBehaviour
     {
         animator.Play(variables.PunchHash);
         isHit = Physics2D.OverlapBox(rayPunch.position, overlapBoxSize, 0, layerMask);
-
         if (isHit)
         {
             timerToResetCombo = true;
@@ -120,7 +122,6 @@ public class CharacherController : MonoBehaviour
         {
             currentHorizontalSpeed *= runningSpeed;
             animator.SetBool(variables.RunHash, true);
-            movement.isRunning = true;
         }
         lastTapTime = Time.time;
     }
@@ -129,13 +130,28 @@ public class CharacherController : MonoBehaviour
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
         animator.SetBool(variables.RunHash, false);
-        movement.isRunning = false;
     }
    
     public void ItemPunch()
     {
         animator.Play(variables.ItemHitHash);
         movement.isAttacking = false;
+    }
+
+    public void RunWithWeapon()
+    {
+        if ((Time.time - lastTapRunTime) < doubleTapTimeRunThreshold)
+        {
+            currentHorizontalSpeed *= runningSpeed;
+            animator.SetBool(variables.RunWithWeapon, true);
+        }
+        lastTapRunTime = Time.time;
+    }
+
+    public void DisableRunWithWeapon()
+    {
+        currentHorizontalSpeed = playerStats.horizontalSpeed;
+        animator.SetBool(variables.RunWithWeapon, false);
     }
 }
 

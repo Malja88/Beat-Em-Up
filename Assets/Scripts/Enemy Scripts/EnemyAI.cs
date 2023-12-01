@@ -7,21 +7,27 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private float attackDistance;
     [SerializeField] private float idleMovementSpeed;
     [SerializeField] private float stunnedTime;
+    [SerializeField] private float interval;
+    [HideInInspector] private float timer;
 
     public bool isIdle;
     public bool idleAction;
     public bool isAttacking;
     public bool canAttack;
 
+    readonly GlobalStringVariables variables = new();
+
+  
     void Start()
     {
         Observable.EveryUpdate().Subscribe(_ =>
         {
-           // SpriteBalance();
+           //SpriteBalance();
             Flip();
             DynamicSpriteRender();
         });
@@ -33,17 +39,17 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         });
     }
 
-    private void SpriteBalance()
-    {
-        if (characterMovement.isJumping && player.position.y < transform.position.y)
-        {
-            spriteRenderer.sortingOrder = -10;
-        }
-        else if (characterMovement.isJumping == false)
-        {
-            spriteRenderer.sortingOrder = 0;
-        }
-    }
+    //private void SpriteBalance()
+    //{
+    //    if (characterMovement.isJumping && player.position.y < transform.position.y)
+    //    {
+    //        spriteRenderer.sortingOrder = -10;
+    //    }
+    //    else if (characterMovement.isJumping == false)
+    //    {
+    //        spriteRenderer.sortingOrder = 0;
+    //    }
+    //}
 
     private void Flip()
     {
@@ -54,10 +60,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     public void Attack()
     {
-        if (!canAttack)
-        {
-            return;
-        }
+        if (!canAttack) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -65,13 +68,14 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         {
             isIdle = false;
             isAttacking = true;
-            //rb2d.velocity = Vector2.zero;
-            // Attack logic...
+            rb2d.velocity = Vector2.zero;
+            animator.SetBool(variables.EnemyWalk, false);
+            AttackPlayer();
         }
         else
         {
             isAttacking = false;
-            //isIdle = true;
+            isIdle = true;
         }
         //float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -110,18 +114,18 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     public async Task PerformActionAsync(int action, float delay)
     {
         idleAction = true;
-
         switch (action)
         {
-            case 0: rb2d.velocity = Vector2.up * idleMovementSpeed; break;
-            case 1: rb2d.velocity = Vector2.down * idleMovementSpeed; break;
-            case 2: rb2d.velocity = Vector2.left * idleMovementSpeed; break;
-            case 3: rb2d.velocity = Vector2.right * idleMovementSpeed; break;
+            case 0: rb2d.velocity = Vector2.up * idleMovementSpeed; animator.SetBool(variables.EnemyWalk, true); break;
+            case 1: rb2d.velocity = Vector2.down * idleMovementSpeed; animator.SetBool(variables.EnemyWalk, true); break;
+            case 2: rb2d.velocity = Vector2.left * idleMovementSpeed; animator.SetBool(variables.EnemyWalk, true); break;
+            case 3: rb2d.velocity = Vector2.right * idleMovementSpeed; animator.SetBool(variables.EnemyWalk, true); break;
             default: break;
         }
 
         await Task.Delay((int)(delay * 1000));
         rb2d.velocity = Vector2.zero;
+        animator.SetBool(variables.EnemyWalk, false);
         await Task.Delay((int)(delay * 1000));
         idleAction = false;
     }
@@ -129,5 +133,15 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     private void DynamicSpriteRender()
     {
         spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
+    }
+
+    private void AttackPlayer()
+    {      
+        timer += Time.deltaTime;
+        if (timer >= interval)
+        {
+            animator.SetTrigger(variables.EnemyAttack);
+            timer -= interval;
+        }
     }
 }

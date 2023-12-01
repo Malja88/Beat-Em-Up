@@ -9,13 +9,13 @@ public class CharacterDamage : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] private PlayerUITest test;
     readonly GlobalStringVariables variables = new();
-    public float currentHealth;
+    [HideInInspector] public float currentHealth;
     void Awake()
     {
         currentHealth = stats.maxHealth;
         collider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Damage")).Subscribe(_ => 
         {
-            
+           
         });
     }
     

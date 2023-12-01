@@ -14,6 +14,7 @@ TagManager:
   - Coin
   - Punch
   - Obstacle
+  - Weapon
   layers:
   - Default
   - TransparentFX

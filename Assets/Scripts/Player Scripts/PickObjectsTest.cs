@@ -10,7 +10,7 @@ public class PickObjectsTest : MonoBehaviour
     [SerializeField] private Animator animator;
     readonly GlobalStringVariables variables = new();
     public static event Action ThrowItem;
-    [SerializeField] private bool canPickUp;
+    [SerializeField] public bool canPickUp;
     void Start()
     {
         playerCollider.OnTriggerStay2DAsObservable().Subscribe(_ =>
@@ -23,6 +23,8 @@ public class PickObjectsTest : MonoBehaviour
                     weaponScript.PickUp();
                     canPickUp = false;
                     characterMovement.isAttackingWithWeapon = true;
+                    characterMovement.isRunningWithWeapon = true;
+                    characterMovement.isRunning = false;
                     animator.SetBool(variables.IdleWithWeapon, true);
                 }
             }
@@ -37,6 +39,8 @@ public class PickObjectsTest : MonoBehaviour
                 characterMovement.isAttacking = true;
                 animator.SetBool(variables.IdleWithWeapon, false);
                 characterMovement.isAttackingWithWeapon = false;
+                characterMovement.isRunningWithWeapon = false;
+                characterMovement.isRunning = true;
             }
         });
     }

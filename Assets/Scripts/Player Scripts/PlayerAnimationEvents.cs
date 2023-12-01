@@ -3,20 +3,23 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private BoxCollider2D comboEndTrigger;
     [SerializeField] private BoxCollider2D punchTrigger;
-    public void StayInFrontWhileJumping()
+    public void JumpingOn()
     {
         characterMovement.isJumping = true;
         characterMovement.isAttacking = false;
         characterMovement.isAttackingWithWeapon = false;
+        characterMovement.isRunning = false;
     }
 
-    public void RecoverSpriteOrderAfterJump()
+    public void JumpingOff()
     {
         characterMovement.isJumping = false;
         characterMovement.isAttacking = true;
         characterMovement.isAttackingWithWeapon = true;
+        characterMovement.isRunning = true;    
     }
 
     public void LockAttack()
@@ -49,23 +52,13 @@ public class PlayerAnimationEvents : MonoBehaviour
         comboEndTrigger.enabled = false;
     }
 
-    //public void HideWeapon()
-    //{
-    //    weaponSpriteRenderer.enabled = false;
-    //}
-
-    //public void ShowWeapon()
-    //{
-    //    weaponSpriteRenderer.enabled = true;    
-    //}
-
-    public void PunchTriggerOn()
+    public void PlayerColliderOn()
     {
-        punchTrigger.enabled = true;
+       playerCollider.enabled = true;
     }
 
-    public void PunchTriggerOff()
+    public void PlaeyerColliderOff()
     {
-        punchTrigger.enabled = false;
+        playerCollider.enabled = false;
     }
 }

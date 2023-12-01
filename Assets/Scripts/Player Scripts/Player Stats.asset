@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player Stats
   m_EditorClassIdentifier: 
   maxHealth: 100
-  horizontalSpeed: 20
-  verticalSpeed: 10
+  horizontalSpeed: 25
+  verticalSpeed: 12.5
   skillPoints: 0
   level: 6
   damage: 0

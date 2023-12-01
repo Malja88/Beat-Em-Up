@@ -11,7 +11,6 @@ public class ObstacleSpriteBalance : MonoBehaviour, IDisposable
     {
         obstacleSpriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Subscribe to EveryUpdate with TakeUntilDestroy
         updateSubscription = Observable.EveryUpdate()
             .TakeUntilDestroy(this)
             .Subscribe(_ => { SpriteBalance(); });
@@ -19,17 +18,14 @@ public class ObstacleSpriteBalance : MonoBehaviour, IDisposable
 
     private void SpriteBalance()
     {
-        // Check if the obstacleSpriteRenderer is null before accessing
         if (obstacleSpriteRenderer != null)
         {
             obstacleSpriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
         }
     }
 
-    // Implement IDisposable to properly dispose of the subscription
     public void Dispose()
     {
-        // Dispose of the subscription
         updateSubscription?.Dispose();
     }
 }

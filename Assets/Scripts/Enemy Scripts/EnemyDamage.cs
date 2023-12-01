@@ -12,76 +12,69 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private CharacherController characherController;
     [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem knockDownEffect;
     [SerializeField] private float punchRecoilForce;
-    [SerializeField] private float stunnedTime;
+    [SerializeField] private float knockDownRecoilForce;
+    [SerializeField] private float knockDownForceByWeapon;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject skillPointPrefab;
     [SerializeField] private int coinAmount;
-    public int skillPoint;
+    [SerializeField] public int skillPoint;
+    readonly GlobalStringVariables variables = new();
 
+    private void Awake()
+    {
+        skillPoint = Random.Range(1, 6);
+    }
     void Start()
     {
-        Observable.EveryUpdate().Subscribe(_ =>
-        {
-            skillPoint = Random.Range(1, 6);
-            //StunnedAsync();
-        });
-
-        boxCollider.OnTriggerEnter2DAsObservable().Subscribe(_ =>
+          boxCollider.OnTriggerEnter2DAsObservable().Subscribe(_ =>
         {
             if(_.CompareTag("WeakAttack"))
             {
-                //rb2d.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
-                //enemyAI.isIdle = false;
-                //enemyAI.isAttacking = false;
+                knockDownEffect.Play();
+                animator.Play(variables.EnemyKnockDown);
+                KnockBack(knockDownRecoilForce);
                 CoinSplash();
             }
             if(_.CompareTag("Punch"))
             {
-                playerLevelUpSystem.GainExperience(skillPoint);
+                animator.Play(variables.EnemyHurt);
+                playerLevelUpSystem.GainExperience(skillPoint = Random.Range(1, 6));
                 Instantiate(skillPointPrefab, skillpointStartFlight.position, Quaternion.identity);
-                KnockBackAsync();            
+                KnockBack(punchRecoilForce);            
             }
-        });
-
-        boxCollider.OnCollisionEnter2DAsObservable().Subscribe(_ => 
-        {
-            if (_.gameObject.CompareTag("Pipe"))
+            if(_.CompareTag("Weapon"))
             {
-                rb2d.velocity = Vector2.zero;
+                KnockBackByWeapon();
             }
         });
     }
 
-    //public async Task StunnedAsync()
-    //{
-    //    if (characherController.isHit)
-    //    {
-    //        //KnockBack();
-    //        rb2d.velocity = Vector2.zero;
-    //       // enemyAI.isIdle = false;
-    //       //enemyAI.canAttack = false;
-    //       // await Task.Delay(1000);
-    //        //enemyAI.isIdle = true;
-    //        //enemyAI.canAttack = true;
-    //    }
-    //}
-
-    private async void KnockBackAsync()
+    private async void KnockBack(float punchPower)
     {
         if (player.position.x < transform.position.x)
         {
-            rb2d.AddForce(Vector2.right * punchRecoilForce, ForceMode2D.Impulse);
-            await Task.Delay(200);
+            enemyAI.canAttack = false;
+            enemyAI.isIdle = false;
+            rb2d.AddForce(Vector2.right * punchPower, ForceMode2D.Impulse);
+            await Task.Delay(300);
+            enemyAI.canAttack = true;
+            enemyAI.isIdle=true;
             rb2d.velocity = Vector2.zero;
+            
         }
         if (player.position.x > transform.position.x)
         {
-            rb2d.AddForce(Vector2.left * punchRecoilForce, ForceMode2D.Impulse);
-            await Task.Delay(200);
+            enemyAI.canAttack = false;
+            enemyAI.isIdle = false;
+            rb2d.AddForce(Vector2.left * punchPower, ForceMode2D.Impulse);
+            await Task.Delay(300);
+            enemyAI.canAttack = true;
+            enemyAI.isIdle=true;
             rb2d.velocity = Vector2.zero;
         }
-
     }
 
     private void CoinSplash()
@@ -90,5 +83,13 @@ public class EnemyDamage : MonoBehaviour
         {
             Instantiate(coinPrefab, transform.position, Quaternion.identity);
         }      
+    }
+
+    private async void KnockBackByWeapon()
+    {
+        rb2d.AddForce(Vector2.right * knockDownForceByWeapon, ForceMode2D.Impulse);
+        animator.Play(variables.EnemyKnockDown);
+        await Task.Delay(100);
+        rb2d.velocity = Vector2.zero;   
     }
 }

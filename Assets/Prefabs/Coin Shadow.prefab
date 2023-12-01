@@ -103,7 +103,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 22528
+    m_Bits: 22848
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -354,7 +354,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8832
+    m_Bits: 9152
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -405,7 +405,7 @@ MonoBehaviour:
   coinRb: {fileID: 8488523658166687581}
   bouncePower: 2.5
   randomStart: 2
-  randomEnd: 4
+  randomEnd: 3
   shadowCollider: {fileID: 5461215596218066635}
   coinCollider: {fileID: 2273976484133092687}
 --- !u!50 &509098656293137843

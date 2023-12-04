@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f23627b118e3fc9429d1e11035859305
+guid: 862a8a05d2bb3bb4182f6bd2c82cf0ff
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lamps_0
+      name: Walk_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 126
-        width: 35
-        height: 40
+        x: 21
+        y: 0
+        width: 31
+        height: 50
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f92fb2c3c17e2dc4c9fff20e1694dbd5
-      internalID: -429832398
+      spriteID: ba6c7207d28c53f408a9e193142c8dae
+      internalID: 595527827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lamps_1
+      name: Walk_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 126
-        width: 35
-        height: 40
+        x: 84
+        y: 0
+        width: 30
+        height: 52
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,8 +171,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73159b8a5568bc64685953383bfbb413
-      internalID: 114746547
+      spriteID: 9f2c384899c36db4293ba6f2921b8bcd
+      internalID: 600092591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 0
+        width: 31
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9106b061c51dcf842a42f33022e5a605
+      internalID: -846402535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 0
+        width: 34
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd60e3ea414f2e4e8aadf6fe112db12
+      internalID: -1505283630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 0
+        width: 31
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064d51b3f13592b49bb82b2cefb769b7
+      internalID: -1783829060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_5
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 0
+        width: 30
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b16deb54694b44a80484d951a97d78
+      internalID: -1011147189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_6
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 0
+        width: 27
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f675b57a9c624640952796b284a02bd
+      internalID: 1247648380
       vertices: []
       indices: 
       edges: []
@@ -188,8 +293,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      lamps_0: -429832398
-      lamps_1: 114746547
+      Walk_0: 595527827
+      Walk_1: 600092591
+      Walk_2: -846402535
+      Walk_3: -1505283630
+      Walk_4: -1783829060
+      Walk_5: -1011147189
+      Walk_6: 1247648380
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

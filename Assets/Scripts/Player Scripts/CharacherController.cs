@@ -44,8 +44,9 @@ public class CharacherController : MonoBehaviour
     public void Move(float hMove, float vMove)
     {
         //Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
-        //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);         
-
+        //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);
+        
+        animator.SetBool(variables.Walk, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
         Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
@@ -53,6 +54,11 @@ public class CharacherController : MonoBehaviour
         {
             Flip();
         }
+    }
+
+    public void MoveWithWeapon(float hMove, float vMove)
+    {
+        animator.SetBool(variables.WalkingWithWeapon, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
     }
 
     public void Flip()

@@ -33,6 +33,7 @@ public class CharacterMovement : MonoBehaviour
             CharacterKick();
             DynamicSpriteRender();
             CharacterRunWithWeapon();
+            CharacterMoveWithWeapon();
         });
     }
 
@@ -43,7 +44,17 @@ public class CharacterMovement : MonoBehaviour
         horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
         verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
         controller.Move(horizontalMove, verticalMove);
-        //animator.SetBool("Walk", Mathf.Abs(horizontalMove) >= 1 || Mathf.Abs(verticalMove) >= 1);
+    }
+
+    private void CharacterMoveWithWeapon()
+    {
+        if (!isMoving) return;
+        if(!pickObjectsTest.canPickUp)
+        {
+            horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
+            verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
+            controller.MoveWithWeapon(horizontalMove, verticalMove);
+        }
     }
 
     private void CharacterJump()

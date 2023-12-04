@@ -38,6 +38,7 @@ public class PickObjectsTest : MonoBehaviour
                 canPickUp = true;
                 characterMovement.isAttacking = true;
                 animator.SetBool(variables.IdleWithWeapon, false);
+                animator.SetBool(variables.WalkingWithWeapon, false) ;
                 characterMovement.isAttackingWithWeapon = false;
                 characterMovement.isRunningWithWeapon = false;
                 characterMovement.isRunning = true;

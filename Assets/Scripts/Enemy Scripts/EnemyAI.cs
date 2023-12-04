@@ -4,17 +4,16 @@ using UniRx;
 using UnityEngine;
 public class EnemyAI : MonoBehaviour, IAttack, IIde
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private CharacterMovement characterMovement;
-    [SerializeField] private Rigidbody2D rb2d;
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Transform player;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected CharacterMovement characterMovement;
+    [SerializeField] protected Rigidbody2D rb2d;
+    [SerializeField] protected Animator animator;
 
-    [SerializeField] private float attackDistance;
-    [SerializeField] private float idleMovementSpeed;
-    [SerializeField] private float stunnedTime;
-    [SerializeField] private float interval;
-    [HideInInspector] private float timer;
+    [SerializeField] protected float attackDistance;
+    [SerializeField] protected float idleMovementSpeed;
+    [SerializeField] protected float interval;
+    [HideInInspector] protected float timer;
 
     public bool isIdle;
     public bool idleAction;
@@ -29,7 +28,6 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     {
         updateSubscription = Observable.EveryUpdate().Subscribe(_ =>
         {
-            //SpriteBalance();
             Flip();
             DynamicSpriteRender();
         });
@@ -41,19 +39,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         });
     }
 
-    //private void SpriteBalance()
-    //{
-    //    if (characterMovement.isJumping && player.position.y < transform.position.y)
-    //    {
-    //        spriteRenderer.sortingOrder = -10;
-    //    }
-    //    else if (characterMovement.isJumping == false)
-    //    {
-    //        spriteRenderer.sortingOrder = 0;
-    //    }
-    //}
-
-    private void Flip()
+    public void Flip()
     {
         if (this == null)
         {
@@ -83,21 +69,6 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
             isAttacking = false;
             isIdle = true;
         }
-        //float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        // if (distanceToPlayer < attackDistance)
-        // {
-        //        isIdle = false;
-        //    canAttack = true;
-        //        //isAttacking = true;
-        //        rb2d.velocity = Vector2.zero;
-        //        //Attack logic...
-        // }
-
-        //  else
-        //  {
-        //     canAttack = false;
-        //  }
     }
 
 
@@ -105,7 +76,6 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     {
         if (!isIdle)
         {
-           // rb2d.velocity = Vector2.zero;
             return;
         }
 
@@ -117,7 +87,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         }
     }
 
-    public async Task PerformActionAsync(int action, float delay)
+    public virtual async Task PerformActionAsync(int action, float delay)
     {
         idleAction = true;
         switch (action)
@@ -136,7 +106,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         idleAction = false;
     }
 
-    private void DynamicSpriteRender()
+    protected void DynamicSpriteRender()
     {
         if (this == null || spriteRenderer == null)
         {
@@ -145,7 +115,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 
-    private void AttackPlayer()
+    protected void AttackPlayer()
     {      
         timer += Time.deltaTime;
         if (timer >= interval)

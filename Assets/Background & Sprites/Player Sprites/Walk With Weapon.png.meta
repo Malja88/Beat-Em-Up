@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f23627b118e3fc9429d1e11035859305
+guid: feeb5d1c97fb9c74f86705e69dcf4fa5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lamps_0
+      name: Walk With Weapon_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 126
-        width: 35
-        height: 40
+        x: 21
+        y: 0
+        width: 31
+        height: 62
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f92fb2c3c17e2dc4c9fff20e1694dbd5
-      internalID: -429832398
+      spriteID: fa03418af4ba0c14ab2d65f8f20954e1
+      internalID: -1197379103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lamps_1
+      name: Walk With Weapon_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 126
-        width: 35
-        height: 40
+        x: 84
+        y: 0
+        width: 30
+        height: 63
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,8 +171,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73159b8a5568bc64685953383bfbb413
-      internalID: 114746547
+      spriteID: 2f2e821108bef3349a09160ea4e8a488
+      internalID: -1600010971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk With Weapon_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 0
+        width: 31
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d4336b6d324204b9f72044f8f4450b
+      internalID: 1302282256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk With Weapon_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 0
+        width: 34
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 700dae60edb4ded40aa1d6f64adca0ac
+      internalID: -336694839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk With Weapon_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 0
+        width: 31
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21d238a77a126de448ca73961b5dc6aa
+      internalID: -1452579272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk With Weapon_5
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 0
+        width: 30
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778d629f5ae328a49a80fd32aba7fd45
+      internalID: -694581559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk With Weapon_6
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 0
+        width: 27
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda70d5a8ad89ff45bf48b20f4d6bccb
+      internalID: -1316780409
       vertices: []
       indices: 
       edges: []
@@ -188,8 +293,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      lamps_0: -429832398
-      lamps_1: 114746547
+      Walk With Weapon_0: -1197379103
+      Walk With Weapon_1: -1600010971
+      Walk With Weapon_2: 1302282256
+      Walk With Weapon_3: -336694839
+      Walk With Weapon_4: -1452579272
+      Walk With Weapon_5: -694581559
+      Walk With Weapon_6: -1316780409
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

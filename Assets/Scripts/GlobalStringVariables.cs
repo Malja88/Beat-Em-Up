@@ -1,8 +1,11 @@
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class GlobalStringVariables
 {
     #region Animation Hashes
+    public int Walk = Animator.StringToHash("PlayerWalk");
+    public int WalkingWithWeapon = Animator.StringToHash("PlayerWeaponWalk");
     public int PunchHash = Animator.StringToHash("Player Punch");
     public int PunchFinisherHash = Animator.StringToHash("Punch End Blow");
     public int RunHash = Animator.StringToHash("PlayerRun");
@@ -19,6 +22,7 @@ public class GlobalStringVariables
     public int EnemyKnockDown = Animator.StringToHash("Enemy KnockDown");
     public int EnemyGetUp = Animator.StringToHash("Enemy GetUp");
     public int EnemyDeath = Animator.StringToHash("Enemy Death");
+    public int StrongEnemyWalk = Animator.StringToHash("StrongEnemyWalk");
     #endregion
 
     #region Input Hashes

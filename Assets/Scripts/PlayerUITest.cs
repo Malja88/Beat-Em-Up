@@ -6,7 +6,7 @@ public class PlayerUITest : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider skillSlider;
-    [SerializeField] private CharacterDamage character;
+    [SerializeField] private CharacterHealth character;
     [SerializeField] private PlayerLevelUpSystem playerLevelUpSystem;
     void Start()
     {

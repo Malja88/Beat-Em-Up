@@ -2,7 +2,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UniRx;
 
-public class CharacterDamage : MonoBehaviour
+public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] private new BoxCollider2D collider;
     [SerializeField] private Animator animator;

@@ -15,6 +15,7 @@ TagManager:
   - Punch
   - Obstacle
   - Weapon
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Coin
   - Coin Shadow
   - Obstacle
-  - 
+  - Camera Border
   - 
   - 
   - 

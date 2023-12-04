@@ -18,6 +18,7 @@ public class GlobalStringVariables
     public int EnemyHurt = Animator.StringToHash("Enemy Hurt");
     public int EnemyKnockDown = Animator.StringToHash("Enemy KnockDown");
     public int EnemyGetUp = Animator.StringToHash("Enemy GetUp");
+    public int EnemyDeath = Animator.StringToHash("Enemy Death");
     #endregion
 
     #region Input Hashes

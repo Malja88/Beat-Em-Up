@@ -3880,7 +3880,7 @@ TextureImporter:
         x: 8
         y: 9
         width: 89
-        height: 39
+        height: 54
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3890,27 +3890,6 @@ TextureImporter:
       bones: []
       spriteID: a1608f8bd328ee246aba48252e89b75f
       internalID: 607081891
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_179
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 45
-        width: 17
-        height: 18
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a2fa730d958f504086feb6c8f9c82c0
-      internalID: 734626760
       vertices: []
       indices: 
       edges: []
@@ -3943,7 +3922,7 @@ TextureImporter:
         x: 187
         y: 8
         width: 89
-        height: 41
+        height: 53
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3953,27 +3932,6 @@ TextureImporter:
       bones: []
       spriteID: 82b9690722a82094aa83d844c4d1674b
       internalID: 1780845476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_182
-      rect:
-        serializedVersion: 2
-        x: 239
-        y: 39
-        width: 23
-        height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2eb222554ffd5464285546da7f6c8919
-      internalID: -1091729197
       vertices: []
       indices: 
       edges: []

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -21,18 +22,19 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     public bool canAttack;
 
     readonly GlobalStringVariables variables = new();
+    private IDisposable updateSubscription;
+    private IDisposable fixedUpdateSubscription;
 
-  
     void Start()
     {
-        Observable.EveryUpdate().Subscribe(_ =>
+        updateSubscription = Observable.EveryUpdate().Subscribe(_ =>
         {
-           //SpriteBalance();
+            //SpriteBalance();
             Flip();
             DynamicSpriteRender();
         });
 
-        Observable.EveryFixedUpdate().Subscribe(_ =>
+        fixedUpdateSubscription = Observable.EveryFixedUpdate().Subscribe(_ =>
         {
             Idle();
             Attack();
@@ -53,6 +55,10 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     private void Flip()
     {
+        if (this == null)
+        {
+            return;
+        }
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * -Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = scale;
@@ -105,7 +111,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
         if (!idleAction)
         {
-            int randomAction = Random.Range(0, 4);
+            int randomAction = UnityEngine.Random.Range(0, 4);
             float delay = 3;
             _ = PerformActionAsync(randomAction, delay);
         }
@@ -132,6 +138,10 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     private void DynamicSpriteRender()
     {
+        if (this == null || spriteRenderer == null)
+        {
+            return;
+        }
         spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 
@@ -143,5 +153,11 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
             animator.SetTrigger(variables.EnemyAttack);
             timer -= interval;
         }
+    }
+
+    private void OnDestroy()
+    {
+        updateSubscription?.Dispose();
+        fixedUpdateSubscription?.Dispose();
     }
 }

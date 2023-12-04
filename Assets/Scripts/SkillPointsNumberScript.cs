@@ -14,7 +14,14 @@ public class SkillPointsNumberScript : MonoBehaviour
     {
         numberText.text = enemyDamage.skillPoint.ToString();
         float currentY = transform.position.y;
-        transform.DOMoveY(currentY + 1.2f, 1);
-        Destroy(gameObject, 1f);
+
+        if (!DOTween.IsTweening(transform))
+        {
+            transform.DOMoveY(currentY + 1.2f, 1).OnKill(() => Destroy(gameObject));
+        }
+        else
+        {
+            Destroy(gameObject, 1f);
+        }
     }
 }

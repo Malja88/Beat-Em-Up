@@ -22,12 +22,16 @@ public class CoinScriptTest : MonoBehaviour
 
     [SerializeField] private BoxCollider2D shadowCollider;
     [SerializeField] private CircleCollider2D coinCollider;
+    [SerializeField] private Rigidbody2D shadowRb;
     private Vector3 targetPosition;
     private float timer;
 
     void Start()
     {
-        shadowCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall") || x.gameObject.CompareTag("Obstacle")).Subscribe(x => { smoothSpeed = 0; });
+        shadowCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall") || x.gameObject.CompareTag("Obstacle")).Subscribe(x => 
+        { 
+            smoothSpeed = 0;      
+        });
         coinCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Player")).Subscribe(_ => { Destroy(gameObject); } );
         StartCoroutine(Wander());
         TurnCoinColliderOn();

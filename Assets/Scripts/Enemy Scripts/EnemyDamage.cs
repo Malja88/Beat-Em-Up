@@ -50,6 +50,8 @@ public class EnemyDamage : MonoBehaviour
                 KnockBackByWeapon();
             }
         });
+
+        boxCollider.OnCollisionEnter2DAsObservable().Where(x => x.gameObject.CompareTag("Wall")).Subscribe(_ => { rb2d.velocity = Vector2.zero; });
     }
 
     private async void KnockBack(float punchPower)
@@ -65,7 +67,7 @@ public class EnemyDamage : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             
         }
-        if (player.position.x > transform.position.x)
+        else
         {
             enemyAI.canAttack = false;
             enemyAI.isIdle = false;
@@ -87,9 +89,21 @@ public class EnemyDamage : MonoBehaviour
 
     private async void KnockBackByWeapon()
     {
-        rb2d.AddForce(Vector2.right * knockDownForceByWeapon, ForceMode2D.Impulse);
-        animator.Play(variables.EnemyKnockDown);
-        await Task.Delay(100);
-        rb2d.velocity = Vector2.zero;   
+        if (player.position.x < transform.position.x)
+        {
+            rb2d.AddForce(Vector2.right * knockDownForceByWeapon, ForceMode2D.Impulse);
+            knockDownEffect.Play();
+            animator.Play(variables.EnemyKnockDown);
+            await Task.Delay(100);
+            rb2d.velocity = Vector2.zero;
+        }
+        else
+        {
+            rb2d.AddForce(Vector2.left * knockDownForceByWeapon, ForceMode2D.Impulse);
+            knockDownEffect.Play();
+            animator.Play(variables.EnemyKnockDown);
+            await Task.Delay(100);
+            rb2d.velocity = Vector2.zero;
+        }
     }
 }

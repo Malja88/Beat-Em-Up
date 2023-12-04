@@ -2,7 +2,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class EnemyDamageDealer : MonoBehaviour
+public class DamageDealer : MonoBehaviour
 {
     [SerializeField] public int damage;
     [SerializeField] private BoxCollider2D damageDealerCollider;

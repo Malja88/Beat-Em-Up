@@ -103,7 +103,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 22848
+    m_Bits: 55616
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -354,7 +354,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 9152
+    m_Bits: 41920
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -396,18 +396,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71050cf5d42d7234ebba1bf9f15b7bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomXStart: -3
-  randomXEnd: 9
+  randomXStart: -9
+  randomXEnd: 3
   randomYStart: 2
   randomYEnd: -9
-  smoothSpeed: 1
+  smoothSpeed: 0.5
   wanderTime: 1.5
   coinRb: {fileID: 8488523658166687581}
-  bouncePower: 2.5
+  bouncePower: 3.5
   randomStart: 2
   randomEnd: 3
   shadowCollider: {fileID: 5461215596218066635}
   coinCollider: {fileID: 2273976484133092687}
+  shadowRb: {fileID: 509098656293137843}
 --- !u!50 &509098656293137843
 Rigidbody2D:
   serializedVersion: 4

@@ -5,7 +5,6 @@ public class EnemyAnimationEvents : MonoBehaviour
     [SerializeField] private EnemyAI enemyAI;
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private BoxCollider2D enemyPunchCollider;
     [SerializeField] private Rigidbody2D rb;
     readonly GlobalStringVariables variables = new();
 

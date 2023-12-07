@@ -13,7 +13,8 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     [SerializeField] protected float attackDistance;
     [SerializeField] protected float idleMovementSpeed;
     [SerializeField] protected float interval;
-    [HideInInspector] protected float timer;
+    [SerializeField] protected float delay;
+    [HideInInspector] public float timer;
 
     public bool isIdle;
     public bool idleAction;
@@ -82,12 +83,11 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
         if (!idleAction)
         {
             int randomAction = UnityEngine.Random.Range(0, 4);
-            float delay = 3;
-            _ = PerformActionAsync(randomAction, delay);
+            _ = PerformActionAsync(randomAction);
         }
     }
 
-    public virtual async Task PerformActionAsync(int action, float delay)
+    public virtual async Task PerformActionAsync(int action)
     {
         idleAction = true;
         switch (action)

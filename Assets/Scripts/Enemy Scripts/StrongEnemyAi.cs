@@ -1,33 +1,29 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
 public class StrongEnemyAi : EnemyAI, IChase
 {
+    public bool canChase;
     public bool isChasing;
     [SerializeField] private float followDistance;
     [SerializeField] private float chasingSpeed;
-    [SerializeField] private int action;
-    [SerializeField] private float delay;
-    private int kek;
+    [SerializeField] private float attackTime;
     readonly GlobalStringVariables variables = new();
     void Start()
     {
-        action = Random.Range(0, 4);
-        Observable.EveryUpdate().Subscribe(_ => 
+        Observable.EveryUpdate().Subscribe(_ =>
         {
             Flip();
             DynamicSpriteRender();
+            HeavyAttackTimer();
         });
 
         Observable.EveryFixedUpdate().Subscribe(_ =>
         {
             Idle();
             Chase();
+            HeavyAttack();
         });
     }
 
@@ -48,21 +44,49 @@ public class StrongEnemyAi : EnemyAI, IChase
 
     public void Chase()
     {
-        if(isChasing) { return; }
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer < followDistance)
+        if (this == null) // Check if the object has been destroyed
         {
-            isIdle = false;
-            isChasing = true;
-            Vector2 direction = (player.position - transform.position).normalized;
-            rb2d.velocity = direction * chasingSpeed;
+            return;
         }
 
-        if (distanceToPlayer < attackDistance)
+        if (!canChase)
+        {
+            return;
+        }
+
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb2d.velocity = direction * chasingSpeed;
+        isIdle = false;
+        animator.SetBool(variables.EnemyRun, true);
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= attackDistance)
         {
             isAttacking = true;
-            isChasing = false;
-            isChasing = false;
+            isIdle = false;
+            canChase = false;
+            animator.SetBool(variables.EnemyRun, false);
+            rb2d.velocity = Vector2.zero;
         }
-    }    
+    }
+
+    private async void HeavyAttack()
+    {
+        if (!isAttacking) return;
+        animator.Play(variables.EnemyHeavyAttack);
+        isAttacking = false;
+        await Task.Delay(1000);
+        isIdle = true;
+    }
+
+    private void HeavyAttackTimer()
+    {
+        timer += Time.deltaTime;
+        if(timer >= attackTime)
+        {
+            canChase = true;
+            timer -= attackTime;
+        }
+    }
 }

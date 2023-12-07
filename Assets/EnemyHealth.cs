@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void EnemyDeath()
+    public virtual void EnemyDeath()
     {
         rb.velocity = Vector2.zero;
         enemyCollider.enabled = false;

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class SkillPointsNumberScript : MonoBehaviour
 {
-    [SerializeField] private EnemyDamage enemyDamage;
     [SerializeField] private TextMeshProUGUI numberText;
+    [SerializeField] private PlayerLevelUpSystem playerLevelUpSystem;
+    [HideInInspector] public int skillPoint;
     private void Awake()
     {
-        enemyDamage = FindObjectOfType<EnemyDamage>();
+         playerLevelUpSystem = FindObjectOfType<PlayerLevelUpSystem>();
+         skillPoint = Random.Range(1, 6);
     }
     void Start()
     {
-        numberText.text = enemyDamage.skillPoint.ToString();
+      
+        playerLevelUpSystem.GainExperience(skillPoint = Random.Range(1, 6));
+        numberText.text = skillPoint.ToString();
         float currentY = transform.position.y;
 
         if (!DOTween.IsTweening(transform))

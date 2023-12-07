@@ -18,8 +18,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         characterMovement.isJumping = false;
         characterMovement.isAttacking = true;
-        characterMovement.isAttackingWithWeapon = true;
-        characterMovement.isRunning = true;    
+       // characterMovement.isAttackingWithWeapon = true;
+        characterMovement.isRunning = true; 
+        
     }
 
     public void LockAttack()

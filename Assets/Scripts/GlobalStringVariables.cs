@@ -18,11 +18,17 @@ public class GlobalStringVariables
     public int RunWithWeapon = Animator.StringToHash("PlayerRunWithWeapon");
     public int EnemyWalk = Animator.StringToHash("EnemyWalk");
     public int EnemyAttack = Animator.StringToHash("EnemyAttack");
+    public int EnemyHeavyAttack = Animator.StringToHash("Enemy Heavy Attack");
     public int EnemyHurt = Animator.StringToHash("Enemy Hurt");
     public int EnemyKnockDown = Animator.StringToHash("Enemy KnockDown");
     public int EnemyGetUp = Animator.StringToHash("Enemy GetUp");
     public int EnemyDeath = Animator.StringToHash("Enemy Death");
-    public int StrongEnemyWalk = Animator.StringToHash("StrongEnemyWalk");
+    public int EnemyRun = Animator.StringToHash("EnemyRun");
+    //public int StrongEnemyWalk = Animator.StringToHash("StrongEnemyWalk");
+    //public int StrongEnemyAttack = Animator.StringToHash("StrongEnemyAttack"); 
+    //public int strongEnemyHurt = Animator.StringToHash("Strong Enemy Hurt");
+    //public int strongEnemyStandUp = Animator.StringToHash("Strong Enemy Stand Up");
+    //public int strongEnemyKnockDown = Animator.StringToHash("Strong Enemy KnockDown");
     #endregion
 
     #region Input Hashes

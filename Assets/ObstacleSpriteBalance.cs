@@ -2,17 +2,15 @@ using System;
 using UnityEngine;
 using UniRx;
 
-public class ObstacleSpriteBalance : MonoBehaviour, IDisposable
+public class ObstacleSpriteBalance : MonoBehaviour
 {
     private SpriteRenderer obstacleSpriteRenderer;
-    private IDisposable updateSubscription;
+    //private IDisposable updateSubscription;
 
     void Start()
     {
         obstacleSpriteRenderer = GetComponent<SpriteRenderer>();
-
-        updateSubscription = Observable.EveryUpdate()
-            .TakeUntilDestroy(this)
+Observable.EveryUpdate()
             .Subscribe(_ => { SpriteBalance(); });
     }
 
@@ -24,8 +22,8 @@ public class ObstacleSpriteBalance : MonoBehaviour, IDisposable
         }
     }
 
-    public void Dispose()
-    {
-        updateSubscription?.Dispose();
-    }
+    //public void Dispose()
+    //{
+    //    updateSubscription?.Dispose();
+    //}
 }

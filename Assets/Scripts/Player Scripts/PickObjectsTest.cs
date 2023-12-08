@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -21,11 +22,7 @@ public class PickObjectsTest : MonoBehaviour
                 if (_.TryGetComponent(out WeaponScriptTest weaponScript))
                 {
                     weaponScript.PickUp();
-                    canPickUp = false;
-                    characterMovement.isAttackingWithWeapon = true;
-                    characterMovement.isRunningWithWeapon = true;
-                    characterMovement.isRunning = false;
-                    animator.SetBool(variables.IdleWithWeapon, true);
+                    PickUpObject();
                 }
             }
         });
@@ -33,16 +30,33 @@ public class PickObjectsTest : MonoBehaviour
         Observable.EveryUpdate().Subscribe(_ =>
         {
             if ((Input.GetKeyUp(KeyCode.K)))
-            {               
-                ThrowItem?.Invoke();
-                canPickUp = true;
-                characterMovement.isAttacking = true;
-                animator.SetBool(variables.IdleWithWeapon, false);
-                animator.SetBool(variables.WalkingWithWeapon, false) ;
-                characterMovement.isAttackingWithWeapon = false;
-                characterMovement.isRunningWithWeapon = false;
-                characterMovement.isRunning = true;
+            {
+                ThrowObject();
             }
         });
+    }
+
+    private void PickUpObject()
+    {
+        animator.Play(variables.PickUpHash);
+        canPickUp = false;
+        characterMovement.isAttackingWithWeapon = true;
+        characterMovement.isRunningWithWeapon = true;
+        characterMovement.isRunning = false;
+        animator.SetBool(variables.IdleWithWeapon, true);
+    }
+
+    private async void ThrowObject()
+    {
+        animator.Play(variables.ThrowHash);
+        await Task.Delay(200);
+        ThrowItem?.Invoke();
+        canPickUp = true;
+        characterMovement.isAttacking = true;
+        animator.SetBool(variables.IdleWithWeapon, false);
+        animator.SetBool(variables.WalkingWithWeapon, false);
+        characterMovement.isAttackingWithWeapon = false;
+        characterMovement.isRunningWithWeapon = false;
+        characterMovement.isRunning = true;
     }
 }

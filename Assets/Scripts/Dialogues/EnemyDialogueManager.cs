@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class EnemyDialogueManager : MonoBehaviour
 {
     [SerializeField] private Queue<string> sentences = new Queue<string>();
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Button nextButton;
     [SerializeField] private GameObject dialogueBox;
-    [SerializeField] private GameObject enemyDialogueBox;
+
     public void StartDialogue(Dialogue dialogue)
     {
         nameText.text = dialogue.name;
@@ -31,7 +31,6 @@ public class DialogueManager : MonoBehaviour
         if (sentences.Count == 0)
         {
             EndDialogue();
-            enemyDialogueBox.SetActive(true);
             return;
         }
 

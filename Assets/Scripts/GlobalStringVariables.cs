@@ -16,6 +16,7 @@ public class GlobalStringVariables
     public int JumpHash = Animator.StringToHash("Player Jump");
     public int PickUpHash = Animator.StringToHash("Player PickUp");
     public int ThrowHash = Animator.StringToHash("Player Throw Item");
+    public int JumpWithWeapon = Animator.StringToHash("Player Jump With Weapon");
     public int KickFinisherHash = Animator.StringToHash("Kick End Blow");
     public int RunWithWeapon = Animator.StringToHash("PlayerRunWithWeapon");
     public int EnemyWalk = Animator.StringToHash("EnemyWalk");

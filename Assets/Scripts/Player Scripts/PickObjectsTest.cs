@@ -12,6 +12,7 @@ public class PickObjectsTest : MonoBehaviour
     readonly GlobalStringVariables variables = new();
     public static event Action ThrowItem;
     [SerializeField] public bool canPickUp;
+    [SerializeField] public bool canThrow;
     void Start()
     {
         playerCollider.OnTriggerStay2DAsObservable().Subscribe(_ =>
@@ -29,6 +30,7 @@ public class PickObjectsTest : MonoBehaviour
 
         Observable.EveryUpdate().Subscribe(_ =>
         {
+            if (!canThrow) { return; }
             if ((Input.GetKeyUp(KeyCode.K)))
             {
                 ThrowObject();
@@ -39,6 +41,7 @@ public class PickObjectsTest : MonoBehaviour
     private void PickUpObject()
     {
         animator.Play(variables.PickUpHash);
+        canThrow = true;
         canPickUp = false;
         characterMovement.isAttackingWithWeapon = true;
         characterMovement.isRunningWithWeapon = true;

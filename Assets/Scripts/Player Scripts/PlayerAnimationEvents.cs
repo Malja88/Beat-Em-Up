@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private PickObjectsTest pickObjects;
     [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private BoxCollider2D comboEndTrigger;
     [SerializeField] private BoxCollider2D punchTrigger;
@@ -12,6 +13,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         characterMovement.isAttacking = false;
         characterMovement.isAttackingWithWeapon = false;
         characterMovement.isRunning = false;
+        pickObjects.canThrow = false;
     }
 
     public void JumpingOff()
@@ -19,8 +21,8 @@ public class PlayerAnimationEvents : MonoBehaviour
         characterMovement.isJumping = false;
         characterMovement.isAttacking = true;
        // characterMovement.isAttackingWithWeapon = true;
-        characterMovement.isRunning = true; 
-        
+        characterMovement.isRunning = true;
+        pickObjects.canThrow = true;
     }
 
     public void LockAttack()

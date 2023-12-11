@@ -7,6 +7,7 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private Animator animator;
     readonly GlobalStringVariables variables = new();
     [SerializeField] private CharacterMovement movement;
+    [SerializeField] private PickObjectsTest pickObjects;
 
     [Header("Player Attack Settings")]
     [SerializeField] private Vector2 overlapBoxSize;
@@ -38,7 +39,7 @@ public class CharacherController : MonoBehaviour
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
         currentComboAttackTimer = comboAttackTimer;
-
+        pickObjects = GetComponent<PickObjectsTest>();
     }
 
     public void Move(float hMove, float vMove)
@@ -70,6 +71,10 @@ public class CharacherController : MonoBehaviour
     public void Jump()
     {
         animator.Play(variables.JumpHash);
+        if(!movement.isJumping && !pickObjects.canPickUp)
+        {
+            animator.Play(variables.JumpWithWeapon);
+        }
     }
 
     public void Punch()

@@ -70,19 +70,19 @@ public class WeaponScriptTest : MonoBehaviour
             isThrow = true;
             pipe.localPosition = pipePositionOnPlayer;
         }
-        if (Input.GetKeyDown(KeyCode.K) && characterMovement.isJumping)
-        {
-            if(!isJumpingThrow) { return; }
-            weaponSpriteRenderer.enabled = true;
-            isJumpingThrow = isJumpingWithWeapon = false;
-            isPickUp = isSpriteOrder = true;
-            shadowSpiteRenderer.enabled = true;
-            shadowCollider.enabled = true;
-            damageCollider.enabled = true;
-            transform.SetParent(null);
-            pipe.SetParent(shadow);
-            ThrowWeaponDirection(pipeLeftThrowDirection, shadowLeftThrowDirection, pipeRightThrowDirection, shadowRightThrowDirection, itemJumpingThrowForce);
-        }
+        //if (Input.GetKeyDown(KeyCode.K) && characterMovement.isJumping)
+        //{
+        //    if(!isJumpingThrow) { return; }
+        //    weaponSpriteRenderer.enabled = true;
+        //    isJumpingThrow = isJumpingWithWeapon = false;
+        //    isPickUp = isSpriteOrder = true;
+        //    shadowSpiteRenderer.enabled = true;
+        //    shadowCollider.enabled = true;
+        //    damageCollider.enabled = true;
+        //    transform.SetParent(null);
+        //    pipe.SetParent(shadow);
+        //    ThrowWeaponDirection(pipeLeftThrowDirection, shadowLeftThrowDirection, pipeRightThrowDirection, shadowRightThrowDirection, itemJumpingThrowForce);
+        //}
     }
 
     public void PickUp()

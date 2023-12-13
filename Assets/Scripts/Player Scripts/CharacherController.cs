@@ -26,6 +26,7 @@ public class CharacherController : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float moveSmooth;
     [SerializeField] private float runningSpeed;
+    [SerializeField] private float runningWithWeaponSpeed;
     [SerializeField] private PlayerStats playerStats;  
     [SerializeField] private float doubleTapTimeThreshold;
     [SerializeField] private float doubleTapTimeRunThreshold;
@@ -42,12 +43,33 @@ public class CharacherController : MonoBehaviour
         pickObjects = GetComponent<PickObjectsTest>();
     }
 
+    private void Update()
+    {
+        Debug.Log(currentHorizontalSpeed);
+    }
     public void Move(float hMove, float vMove)
     {
         //Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
         //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);
-        
+
         animator.SetBool(variables.Walk, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
+        //if (Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1)
+        //{
+        //    if (!animator.GetBool(variables.RunHash))
+        //    {
+        //        animator.SetBool(variables.Walk, true);
+        //    }
+        //    if (!animator.GetBool(variables.RunWithWeapon))
+        //    {
+        //        animator.SetBool(variables.RunWithWeapon, true);
+        //    }
+        //}
+        //else
+        //{
+        //    animator.SetBool(variables.Walk, false);
+        //    animator.SetBool(variables.RunWithWeapon, false);
+        //}
+
         Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
@@ -71,9 +93,19 @@ public class CharacherController : MonoBehaviour
     public void Jump()
     {
         animator.Play(variables.JumpHash);
-        if(!movement.isJumping && !pickObjects.canPickUp)
+    }
+
+    public void JumpWithWeapon()
+    {
+        animator.Play(variables.JumpWithWeapon);
+    }
+
+    public void JumpKick()
+    {
+        if(movement.isJumping && Input.GetKeyDown(KeyCode.R))
         {
-            animator.Play(variables.JumpWithWeapon);
+            animator.Play("Player Jump Kick");
+            movement.isJumping = false;
         }
     }
 
@@ -129,7 +161,21 @@ public class CharacherController : MonoBehaviour
 
     public void Run()
     {
-        if ((Time.time - lastTapTime) < doubleTapTimeThreshold)
+        // if (Time.time - lastTapTime < doubleTapTimeThreshold)
+        // {
+        //     currentHorizontalSpeed *= runningSpeed;
+        //     animator.SetBool(variables.RunHash, true);
+        //     animator.SetBool(variables.Walk, false);
+        // }
+        // else
+        // {
+        //     currentHorizontalSpeed = playerStats.horizontalSpeed;
+        //     animator.SetBool(variables.RunHash, false);
+        // }
+
+        //lastTapTime = Time.time;
+
+        if (Time.time - lastTapTime < doubleTapTimeThreshold)
         {
             currentHorizontalSpeed *= runningSpeed;
             animator.SetBool(variables.RunHash, true);
@@ -139,8 +185,8 @@ public class CharacherController : MonoBehaviour
 
     public void DisableRun()
     {
-        currentHorizontalSpeed = playerStats.horizontalSpeed;
         animator.SetBool(variables.RunHash, false);
+        currentHorizontalSpeed = playerStats.horizontalSpeed;
     }
    
     public void ItemPunch()
@@ -153,7 +199,7 @@ public class CharacherController : MonoBehaviour
     {
         if ((Time.time - lastTapRunTime) < doubleTapTimeRunThreshold)
         {
-            currentHorizontalSpeed *= runningSpeed;
+            currentHorizontalSpeed *= runningWithWeaponSpeed;
             animator.SetBool(variables.RunWithWeapon, true);
         }
         lastTapRunTime = Time.time;

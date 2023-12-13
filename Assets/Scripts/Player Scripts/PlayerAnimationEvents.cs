@@ -20,8 +20,23 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         characterMovement.isJumping = false;
         characterMovement.isAttacking = true;
-       // characterMovement.isAttackingWithWeapon = true;
         characterMovement.isRunning = true;
+        pickObjects.canThrow = true;
+    }
+
+    public void JumpingWithWeaponOn()
+    {
+        characterMovement.isJumping = true;
+        characterMovement.isAttackingWithWeapon = false;
+        characterMovement.isRunning = false;
+        pickObjects.canThrow = false;
+    }
+
+    public void JumpingWithWeaponOff()
+    {
+        characterMovement.isJumping = false;
+        characterMovement.isAttackingWithWeapon = true;
+        characterMovement.isRunning = false;
         pickObjects.canThrow = true;
     }
 

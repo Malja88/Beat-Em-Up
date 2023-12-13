@@ -34,6 +34,8 @@ public class CharacterMovement : MonoBehaviour
             DynamicSpriteRender();
             CharacterRunWithWeapon();
             CharacterMoveWithWeapon();
+            CharacterJumpKick();
+            CharacterJumpWithWeapon();
         });
     }
 
@@ -44,6 +46,14 @@ public class CharacterMovement : MonoBehaviour
         horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
         verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
         controller.Move(horizontalMove, verticalMove);
+        //if (Input.GetButtonDown(variables.HorizontalAxis))
+        //{
+        //    controller.Run();
+        //}
+        //if (Input.GetButtonUp(variables.HorizontalAxis))
+        //{
+        //    controller.DisableRun();
+        //}
     }
 
     private void CharacterMoveWithWeapon()
@@ -61,6 +71,19 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isJumping || !Input.GetKeyDown(jumpButton) && !Input.GetButtonDown(variables.Jump)) return;
         controller.Jump();
+    }
+
+    private void CharacterJumpWithWeapon()
+    {
+        if (!isJumping && !pickObjectsTest.canPickUp && Input.GetButtonDown(variables.Jump))
+        {
+            controller.JumpWithWeapon();
+        }
+    }
+
+    private void CharacterJumpKick()
+    {
+        controller.JumpKick();
     }
 
     private void CharacterPunch()

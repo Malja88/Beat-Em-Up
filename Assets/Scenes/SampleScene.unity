@@ -2293,6 +2293,7 @@ MonoBehaviour:
   isHit: 0
   moveSmooth: 0
   runningSpeed: 0
+  runningWithWeaponSpeed: 0
   playerStats: {fileID: 0}
   doubleTapTimeThreshold: 0.2
   doubleTapTimeRunThreshold: 0
@@ -3536,6 +3537,7 @@ MonoBehaviour:
   isHit: 0
   moveSmooth: 0
   runningSpeed: 0
+  runningWithWeaponSpeed: 0
   playerStats: {fileID: 0}
   doubleTapTimeThreshold: 0.2
   doubleTapTimeRunThreshold: 0
@@ -4069,7 +4071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &750219465
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4250,6 +4252,7 @@ MonoBehaviour:
   isHit: 0
   moveSmooth: 0.113
   runningSpeed: 2
+  runningWithWeaponSpeed: 2
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
   doubleTapTimeThreshold: 0.2
   doubleTapTimeRunThreshold: 0.2
@@ -6147,6 +6150,7 @@ MonoBehaviour:
   isHit: 0
   moveSmooth: 0.113
   runningSpeed: 2
+  runningWithWeaponSpeed: 0
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
   doubleTapTimeThreshold: 0.2
   doubleTapTimeRunThreshold: 0

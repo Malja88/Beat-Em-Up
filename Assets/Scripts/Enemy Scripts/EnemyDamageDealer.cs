@@ -2,7 +2,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public class EnemyDamageDealer : MonoBehaviour
 {
     [SerializeField] public int damage;
     [SerializeField] private BoxCollider2D damageDealerCollider;
@@ -11,8 +11,7 @@ public class DamageDealer : MonoBehaviour
     {
         damageDealerCollider.OnTriggerEnter2DAsObservable().Where(x => x.GetComponent<CharacterHealth>() != null).Subscribe(x =>
         {
-            CharacterHealth characterDamage = x.GetComponent<CharacterHealth>();
-            if (characterDamage != null)
+            if (x.TryGetComponent<CharacterHealth>(out var characterDamage))
             {
                 characterDamage.TakeDamage(damage);
             }

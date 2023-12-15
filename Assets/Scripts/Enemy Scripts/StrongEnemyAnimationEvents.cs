@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StrongEnemyAnimationEvents : MonoBehaviour
@@ -10,21 +7,23 @@ public class StrongEnemyAnimationEvents : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private Animator animator;
     readonly GlobalStringVariables variables = new();
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void EnemyMovementOff()
     {
-        //strongEnemyAI.canAttack = false;
         strongEnemyAI.isIdle = false;
         strongEnemyAI.isAttacking = false;
-        //rigidbody2D.bodyType = RigidbodyType2D.Static;
+        strongEnemyAI.isFlip = false;
         rigidbody2D.velocity = Vector2.zero;
         strongEnemyAI.timer = 0;
     }
 
     public void EnemyMovementOn()
     {
-        //strongEnemyAI.canAttack = true;
         strongEnemyAI.isIdle = true;
-        //rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        strongEnemyAI.isFlip = true;
     }
 
     public void GetUpAnimationOn()

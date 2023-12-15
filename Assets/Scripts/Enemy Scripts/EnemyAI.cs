@@ -5,21 +5,22 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour, IAttack, IIde
 {
     [SerializeField] protected Transform player;
+    [Header("Body Components")]
     [SerializeField] protected SpriteRenderer spriteRenderer;
-    [SerializeField] protected CharacterMovement characterMovement;
     [SerializeField] protected Rigidbody2D rb2d;
     [SerializeField] protected Animator animator;
-
+    [Header("AI Variables")]
     [SerializeField] protected float attackDistance;
     [SerializeField] protected float idleMovementSpeed;
     [SerializeField] protected float interval;
     [SerializeField] protected float delay;
-    [HideInInspector] public float timer;
 
-    public bool isIdle;
-    public bool idleAction;
-    public bool isAttacking;
-    public bool canAttack;
+    [HideInInspector] public float timer;
+    [HideInInspector] public bool isIdle;
+    [HideInInspector] public bool idleAction;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool canAttack;
+    [HideInInspector] public bool isFlip;
 
     readonly GlobalStringVariables variables = new();
     private IDisposable updateSubscription;
@@ -42,10 +43,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     public void Flip()
     {
-        if (this == null)
-        {
-            return;
-        }
+        if (this == null || !isFlip) return;
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * -Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = scale;
@@ -75,10 +73,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     public void Idle()
     {
-        if (!isIdle)
-        {
-            return;
-        }
+        if (!isIdle) return;
 
         if (!idleAction)
         {
@@ -108,10 +103,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
 
     protected void DynamicSpriteRender()
     {
-        if (this == null || spriteRenderer == null)
-        {
-            return;
-        }
+        if (this == null || spriteRenderer == null) return;
         spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 

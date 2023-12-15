@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
+    [Header("Script Dependency")]
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private PickObjectsTest pickObjects;
+
+    [Header("Colliders")]
     [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private BoxCollider2D comboEndTrigger;
     [SerializeField] private BoxCollider2D punchTrigger;

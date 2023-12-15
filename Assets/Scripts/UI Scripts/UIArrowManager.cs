@@ -1,4 +1,5 @@
 using DG.Tweening;
+using UniRx;
 using UnityEngine;
 
 public class UIArrowManager : MonoBehaviour
@@ -6,19 +7,17 @@ public class UIArrowManager : MonoBehaviour
     readonly GlobalStringVariables variables = new();
     [SerializeField] private RectTransform rect;
     [SerializeField] private GameObject storeBox;
-    [SerializeField] private Rigidbody2D playerRigidbody;
     void Start()
     {
         rect = GetComponent<RectTransform>();
-    }
-
-    void Update()
-    {
-        if(Input.GetButtonDown(variables.VerticalAxis))
+        Observable.EveryUpdate().Subscribe(_ => 
         {
-            MoveCursor();
-        }
-        DetectPlayerStatsInStore();
+            if (Input.GetButtonDown(variables.VerticalAxis))
+            {
+                MoveCursor();
+            }
+            DetectPlayerStatsInStore();
+        });
     }
 
     private void MoveCursor()
@@ -41,7 +40,6 @@ public class UIArrowManager : MonoBehaviour
         {
             rect.DOLocalMoveY(0, 0.01f);
         }
-
         if (verticalInput > 0 && rect.localPosition.y == 0)
         {
             rect.DOLocalMoveY(-48, 0.01f);
@@ -68,7 +66,6 @@ public class UIArrowManager : MonoBehaviour
         {
             rect.DOLocalMoveY(0, 0.01f);
             storeBox.SetActive(false);
-            playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
 
     }

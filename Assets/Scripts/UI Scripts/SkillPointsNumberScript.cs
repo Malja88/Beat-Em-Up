@@ -13,8 +13,7 @@ public class SkillPointsNumberScript : MonoBehaviour
          skillPoint = Random.Range(1, 6);
     }
     void Start()
-    {
-      
+    {    
         playerLevelUpSystem.GainExperience(skillPoint = Random.Range(1, 6));
         numberText.text = skillPoint.ToString();
         float currentY = transform.position.y;

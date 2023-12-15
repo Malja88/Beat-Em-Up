@@ -3,14 +3,20 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private CharacherController controller;
-    [SerializeField] private WeaponScriptTest weaponScript;
+    [Header("Body Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Header("Script Dependency")]
+    [SerializeField] private CharacherController controller;
     [SerializeField] private PickObjectsTest pickObjectsTest;
+
+    [Header("Input Buttons")]
     [SerializeField] private KeyCode jumpButton;
     [SerializeField] private KeyCode punchButton;
     [SerializeField] private KeyCode kickButton;
-    [HideInInspector] public float horizontalMove, verticalMove;
+    [SerializeField] private KeyCode jumpKickButton;
+
+    [Header("Player Behaviours")]
     public bool isMoving;
     public bool isJumping;
     public bool isAttacking;
@@ -18,10 +24,10 @@ public class CharacterMovement : MonoBehaviour
     public bool isAttackingWithWeapon;
     public bool isRunningWithWeapon;
     readonly GlobalStringVariables variables = new();
+    [HideInInspector] public float horizontalMove, verticalMove;
 
     private void Start()
     {
-
         Observable.EveryUpdate().Subscribe(_ =>
         {
             CharacterMove();
@@ -41,19 +47,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterMove()
     {
-        if (!isMoving)
-            return;
+        if (!isMoving) return;
         horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
         verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
         controller.Move(horizontalMove, verticalMove);
-        //if (Input.GetButtonDown(variables.HorizontalAxis))
-        //{
-        //    controller.Run();
-        //}
-        //if (Input.GetButtonUp(variables.HorizontalAxis))
-        //{
-        //    controller.DisableRun();
-        //}
     }
 
     private void CharacterMoveWithWeapon()
@@ -83,7 +80,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterJumpKick()
     {
-        controller.JumpKick();
+        if(isJumping && Input.GetKeyDown(jumpKickButton))
+        {
+            controller.JumpKick();
+            isJumping = true;
+        }       
     }
 
     private void CharacterPunch()
@@ -120,11 +121,11 @@ public class CharacterMovement : MonoBehaviour
     private void CharacterRun()
     {
         if(!isRunning) { return; }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             controller.Run();
         }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             controller.DisableRun();
         }
@@ -133,11 +134,11 @@ public class CharacterMovement : MonoBehaviour
     private void CharacterRunWithWeapon()
     {
         if (!isRunningWithWeapon) return;
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             controller.RunWithWeapon();
         }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             controller.DisableRunWithWeapon();
         }
@@ -146,9 +147,10 @@ public class CharacterMovement : MonoBehaviour
     private void CharacterItemPunch()
     {
         if (!isAttackingWithWeapon) return;
-        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch) && !weaponScript.isPickUp)
+        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch) && !pickObjectsTest.canPickUp)
         {
             controller.ItemPunch();
+            isAttacking = false;
         }
     }
 

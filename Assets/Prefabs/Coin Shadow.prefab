@@ -396,10 +396,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71050cf5d42d7234ebba1bf9f15b7bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomXStart: -9
-  randomXEnd: 3
+  randomXStart: -2
+  randomXEnd: 2
   randomYStart: 2
-  randomYEnd: -9
+  randomYEnd: -2
   smoothSpeed: 0.5
   wanderTime: 1.5
   coinRb: {fileID: 8488523658166687581}

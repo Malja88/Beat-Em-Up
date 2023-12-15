@@ -14,8 +14,7 @@ public class PlayerDamageDealer : MonoBehaviour
     {
         playerDamageDealerCollider.OnTriggerEnter2DAsObservable().Where(x => x.GetComponent<EnemyHealth>() != null).Subscribe(x =>
         {
-            EnemyHealth enemyHealth = x.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            if (x.TryGetComponent<EnemyHealth>(out var enemyHealth))
             {
                 enemyHealth.TakeDamage(damage);
             }

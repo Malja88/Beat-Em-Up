@@ -14,6 +14,7 @@ public class GlobalStringVariables
     public int IdleWithWeapon = Animator.StringToHash("WeaponIdle");
     public int KickHash = Animator.StringToHash("Player Kick");
     public int JumpHash = Animator.StringToHash("Player Jump");
+    public int JumpKick = Animator.StringToHash("Player Jump Kick");
     public int PickUpHash = Animator.StringToHash("Player PickUp");
     public int ThrowHash = Animator.StringToHash("Player Throw Item");
     public int JumpWithWeapon = Animator.StringToHash("Player Jump With Weapon");
@@ -35,5 +36,21 @@ public class GlobalStringVariables
     public string Jump = "Jump";
     public string Punch = "Fire1";
     public string Kick = "Fire2";
+    #endregion
+
+    #region Tags
+    public string WeaponTag = "Weapon";
+    public string KnockdownPunchTag = "KnockDownPunch";
+    public string PunchTag = "Punch";
+    public string WallTag = "Wall";
+    public string ObstacleTag = "Obstacle";
+    public string PlayerTag = "Player";
+    public string BaseTag = "Base";
+    public string EnemyTag = "Enemy";
+    public string PipeTag = "Pipe";
+    public string DamageTag = "Damage";
+    public string PickObjectTag = "PickObject";
+    public string CoinTag = "Coin";
+    public string StoreTag = "Store";
     #endregion
 }

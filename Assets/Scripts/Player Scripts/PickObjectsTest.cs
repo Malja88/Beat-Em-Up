@@ -6,19 +6,26 @@ using UnityEngine;
 
 public class PickObjectsTest : MonoBehaviour
 {
+    [Header("Body Components")]
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private Animator animator;
-    readonly GlobalStringVariables variables = new();
-    public static event Action ThrowItem;
+
+    [Header("Interactable Object Buttons")]
+    [SerializeField] private KeyCode pickUpObjectButton;
+    [SerializeField] private KeyCode throwObjectButton;
+
+    [Header("Player Behaviour with Interactable Objects")]
     [SerializeField] public bool canPickUp;
     [SerializeField] public bool canThrow;
+    readonly GlobalStringVariables variables = new();
+    public static event Action ThrowItem;
     void Start()
     {
         playerCollider.OnTriggerStay2DAsObservable().Subscribe(_ =>
         {
             if (!canPickUp) { return; }
-            if (Input.GetKey(KeyCode.E) && _.CompareTag("PickObject"))
+            if (Input.GetKey(pickUpObjectButton) && _.CompareTag(variables.PickObjectTag))
             {
                 if (_.TryGetComponent(out WeaponScriptTest weaponScript))
                 {
@@ -31,7 +38,7 @@ public class PickObjectsTest : MonoBehaviour
         Observable.EveryUpdate().Subscribe(_ =>
         {
             if (!canThrow) { return; }
-            if ((Input.GetKeyUp(KeyCode.K)))
+            if ((Input.GetKeyUp(throwObjectButton)))
             {
                 ThrowObject();
             }

@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class CharacherController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D characterRigidBody;
     [SerializeField] private Animator animator;
     readonly GlobalStringVariables variables = new();
-    [SerializeField] private CharacterMovement movement;
-    [SerializeField] private PickObjectsTest pickObjects;
 
     [Header("Player Attack Settings")]
     [SerializeField] private Vector2 overlapBoxSize;
@@ -40,36 +37,14 @@ public class CharacherController : MonoBehaviour
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
         currentComboAttackTimer = comboAttackTimer;
-        pickObjects = GetComponent<PickObjectsTest>();
     }
 
-    private void Update()
-    {
-        Debug.Log(currentHorizontalSpeed);
-    }
     public void Move(float hMove, float vMove)
     {
         //Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
         //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);
 
         animator.SetBool(variables.Walk, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
-        //if (Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1)
-        //{
-        //    if (!animator.GetBool(variables.RunHash))
-        //    {
-        //        animator.SetBool(variables.Walk, true);
-        //    }
-        //    if (!animator.GetBool(variables.RunWithWeapon))
-        //    {
-        //        animator.SetBool(variables.RunWithWeapon, true);
-        //    }
-        //}
-        //else
-        //{
-        //    animator.SetBool(variables.Walk, false);
-        //    animator.SetBool(variables.RunWithWeapon, false);
-        //}
-
         Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
@@ -102,11 +77,7 @@ public class CharacherController : MonoBehaviour
 
     public void JumpKick()
     {
-        if(movement.isJumping && Input.GetKeyDown(KeyCode.R))
-        {
-            animator.Play("Player Jump Kick");
-            movement.isJumping = false;
-        }
+       animator.Play(variables.JumpKick);
     }
 
     public void Punch()
@@ -123,7 +94,6 @@ public class CharacherController : MonoBehaviour
                 animator.Play(variables.PunchFinisherHash);
                 isHit = false;
             }
-
         }
     }
 
@@ -161,20 +131,6 @@ public class CharacherController : MonoBehaviour
 
     public void Run()
     {
-        // if (Time.time - lastTapTime < doubleTapTimeThreshold)
-        // {
-        //     currentHorizontalSpeed *= runningSpeed;
-        //     animator.SetBool(variables.RunHash, true);
-        //     animator.SetBool(variables.Walk, false);
-        // }
-        // else
-        // {
-        //     currentHorizontalSpeed = playerStats.horizontalSpeed;
-        //     animator.SetBool(variables.RunHash, false);
-        // }
-
-        //lastTapTime = Time.time;
-
         if (Time.time - lastTapTime < doubleTapTimeThreshold)
         {
             currentHorizontalSpeed *= runningSpeed;
@@ -192,7 +148,6 @@ public class CharacherController : MonoBehaviour
     public void ItemPunch()
     {
         animator.Play(variables.ItemHitHash);
-        movement.isAttacking = false;
     }
 
     public void RunWithWeapon()

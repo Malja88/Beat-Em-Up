@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class StrongEnemyAi : EnemyAI, IChase
 {
-    public bool canChase;
-    public bool isChasing;
+    [HideInInspector] public bool canChase;
+    [HideInInspector] public bool isChasing;
     [SerializeField] private float followDistance;
     [SerializeField] private float chasingSpeed;
+    [Tooltip("Performs an attack by given time")]
     [SerializeField] private float attackTime;
     readonly GlobalStringVariables variables = new();
     void Start()
@@ -44,19 +45,11 @@ public class StrongEnemyAi : EnemyAI, IChase
 
     public void Chase()
     {
-        if (this == null) // Check if the object has been destroyed
-        {
-            return;
-        }
+        if (this == null || !canChase) return;
 
-        if (!canChase)
-        {
-            return;
-        }
-
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb2d.velocity = direction * chasingSpeed;
         isIdle = false;
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb2d.velocity = direction * chasingSpeed;      
         animator.SetBool(variables.EnemyRun, true);
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);

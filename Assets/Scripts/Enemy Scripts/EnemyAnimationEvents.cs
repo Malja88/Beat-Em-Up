@@ -7,13 +7,16 @@ public class EnemyAnimationEvents : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private Rigidbody2D rb;
     readonly GlobalStringVariables variables = new();
-
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void EnemyMovementOff()
     {
         enemyAI.canAttack = false;
         enemyAI.isIdle = false;
         enemyAI.isAttacking = false;
-        //rb.bodyType = RigidbodyType2D.Static;
+        enemyAI.isFlip = false;
         rb.velocity = Vector2.zero;
     }
 
@@ -21,7 +24,7 @@ public class EnemyAnimationEvents : MonoBehaviour
     {
         enemyAI.canAttack = true;
         enemyAI.isIdle = true;
-        //rb.bodyType = RigidbodyType2D.Dynamic;
+        enemyAI.isFlip = true;
     }
 
     public void GetUpAnimationOn()

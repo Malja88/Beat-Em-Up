@@ -12,10 +12,11 @@ TagManager:
   - Wall
   - Store
   - Coin
-  - Punch
   - Obstacle
   - Weapon
   - Border
+  - Punch
+  - KnockDownPunch
   layers:
   - Default
   - TransparentFX

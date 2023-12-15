@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class WeaponScriptTest : MonoBehaviour
 {
+    [Header("Body Componenets")]
     [SerializeField] private Transform pipe, shadow, player, playerSpriteAnimation;
     [SerializeField] private Rigidbody2D weaponBody, shadowBody;
     [SerializeField] private BoxCollider2D shadowCollider, damageCollider;
     [SerializeField] private SpriteRenderer weaponSpriteRenderer, shadowSpiteRenderer;
     [SerializeField] private CharacterMovement characterMovement;
+
+    [Header("Weapon Position on Pick Up")]
     [SerializeField] private Vector2 pipePositionOnPlayer, shadowPositionOnPlayer;
 
     [Header("Throwing Item Settings, while jumping")]
@@ -22,7 +25,7 @@ public class WeaponScriptTest : MonoBehaviour
     [SerializeField] private float recoilPower;
 
     public bool isSpriteOrder, isThrow, isJumpingThrow, isPickUp, isJumpingWithWeapon;
-
+    readonly GlobalStringVariables variables = new();
     private void Start()
     {
         isSpriteOrder = isPickUp = isJumpingThrow = true;
@@ -39,7 +42,7 @@ public class WeaponScriptTest : MonoBehaviour
 
         shadowCollider.OnCollisionEnter2DAsObservable().Subscribe(_ =>
         {
-            if(_.gameObject.CompareTag("Pipe"))
+            if(_.gameObject.CompareTag(variables.PipeTag))
             {
                 weaponBody.bodyType = shadowBody.bodyType = RigidbodyType2D.Static;
             }
@@ -50,7 +53,7 @@ public class WeaponScriptTest : MonoBehaviour
                              
         });
 
-        damageCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Enemy")).Subscribe(x =>
+        damageCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag(variables.EnemyTag)).Subscribe(x =>
         {
             ApplyRecoil();
         });
@@ -120,7 +123,7 @@ public class WeaponScriptTest : MonoBehaviour
 
     private void Stay()
     {
-        RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask("Base"));
+        RaycastHit2D hit = Physics2D.Raycast(pipe.position, Vector2.down, 0.1f, LayerMask.GetMask(variables.BaseTag));
 
         if (hit.collider != null)
         {
@@ -138,12 +141,6 @@ public class WeaponScriptTest : MonoBehaviour
     //    {
     //        pipe.transform.Rotate(0, 180, 0);
     //    }
-    //}
-
-    //private void SpriteBalance()
-    //{
-    //    if (!isSpriteOrder) return;
-    //    weaponSpriteRenderer.sortingOrder = characterMovement.isJumping && player.position.y < transform.position.y ? -10 : 0;
     //}
 
     private void ThrowWeaponDirection(Vector2 pipeThrowDirection, Vector2 shadowThrowDirection, Vector2 pipeThrowDirection2, Vector2 shadowThrowDirection2, float throwForce)

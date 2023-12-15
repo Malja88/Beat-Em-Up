@@ -7,11 +7,13 @@ using UnityEngine;
 public class PlayerLevelUpSystem : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
-    public int currentSkillPoints;
-    public float skillPointsToNextLevel;
     [SerializeField] private BoxCollider2D playerCollider;
-    [SerializeField] private float currentCoinPrice;
     [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] public int currentSkillPoints;
+    [SerializeField] public float skillPointsToNextLevel;
+    [HideInInspector] private float currentCoinPrice;
+
+    readonly GlobalStringVariables variables = new();
     private void Awake()
     {
         currentCoinPrice = Random.Range(0.1f, 2);
@@ -19,7 +21,7 @@ public class PlayerLevelUpSystem : MonoBehaviour
     }
     void Start()
     {
-        playerCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag("Coin")).Subscribe(_ =>
+        playerCollider.OnTriggerEnter2DAsObservable().Where(x => x.CompareTag(variables.CoinTag)).Subscribe(_ =>
         {
             playerStats.coins += currentCoinPrice;
             

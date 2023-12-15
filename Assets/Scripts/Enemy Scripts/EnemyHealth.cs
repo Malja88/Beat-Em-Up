@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Health")]
     [SerializeField] private int maxHealth;
-    [SerializeField] public float currentHealth;
+    [HideInInspector] public float currentHealth;
+
+    [Header("Body Components")]
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D enemyCollider;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private EnemyAI enemyAI;
+
     readonly GlobalStringVariables variables = new();
     void Awake()
     {
         enemyCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        enemyAI = GetComponent<EnemyAI>();
         currentHealth = maxHealth;
     }
 
@@ -27,7 +33,8 @@ public class EnemyHealth : MonoBehaviour
 
     public virtual void EnemyDeath()
     {
-        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+        enemyAI.isFlip = false;
         enemyCollider.enabled = false;
         animator.Play(variables.EnemyDeath);
         Destroy(gameObject,1.8f);

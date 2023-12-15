@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StrongEnemyHealth : EnemyHealth
 {
-    [SerializeField] StrongEnemyAi enemyAi;
+    [HideInInspector] private StrongEnemyAi enemyAi;
     void Start()
     {
         enemyAi = GetComponent<StrongEnemyAi>();

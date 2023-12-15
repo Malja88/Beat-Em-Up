@@ -1046,7 +1046,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 297832104}
   spriteRenderer: {fileID: 1112217200}
-  characterMovement: {fileID: 1161089127}
   rb2d: {fileID: 115041861}
   animator: {fileID: 0}
   attackDistance: 2
@@ -1058,6 +1057,7 @@ MonoBehaviour:
   idleAction: 0
   isAttacking: 0
   canAttack: 1
+  isFlip: 0
 --- !u!50 &115041861
 Rigidbody2D:
   serializedVersion: 4
@@ -1158,20 +1158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5723cc0ef36f749bdc435c6950467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevelUpSystem: {fileID: 0}
-  player: {fileID: 297832104}
-  skillpointStartFlight: {fileID: 0}
   rb2d: {fileID: 115041861}
-  characherController: {fileID: 1161089128}
   boxCollider: {fileID: 115041862}
   animator: {fileID: 0}
-  knockDownEffect: {fileID: 0}
   punchRecoilForce: 0.1
   knockDownRecoilForce: 0
   knockDownForceByWeapon: 0
+  skillpointStartFlight: {fileID: 0}
+  knockDownEffect: {fileID: 0}
   coinPrefab: {fileID: 0}
   skillPointPrefab: {fileID: 0}
   coinAmount: 0
+  player: {fileID: 297832104}
 --- !u!1 &169866234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193670291}
   - component: {fileID: 193670290}
-  - component: {fileID: 193670289}
+  - component: {fileID: 193670292}
   m_Layer: 0
   m_Name: Store
   m_TagString: Store
@@ -1415,51 +1413,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!61 &193670289
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193670288}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.22, y: 4.78}
-    newSize: {x: 5.22, y: 4.78}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.22, y: 4.78}
-  m_EdgeRadius: 0
 --- !u!212 &193670290
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1521,12 +1474,57 @@ Transform:
   m_GameObject: {fileID: 193670288}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8721256, y: 1.36, z: 0}
+  m_LocalPosition: {x: 5.8721256, y: 2.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &193670292
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193670288}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5055603}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.22, y: 4.78}
+    newSize: {x: 5.22, y: 4.78}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.22, y: 5.7911215}
+  m_EdgeRadius: 0
 --- !u!1 &200104406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,21 +2219,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d799fda9c9da41c41ba015c22896732c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 408654025}
-  weaponScript: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  controller: {fileID: 408654025}
   pickObjectsTest: {fileID: 0}
   jumpButton: 32
   punchButton: 0
   kickButton: 0
-  horizontalMove: 0
-  verticalMove: 0
+  jumpKickButton: 0
   isMoving: 1
   isJumping: 1
   isAttacking: 0
   isRunning: 0
   isAttackingWithWeapon: 0
   isRunningWithWeapon: 0
+  horizontalMove: 0
+  verticalMove: 0
 --- !u!50 &408654024
 Rigidbody2D:
   serializedVersion: 4
@@ -2275,10 +2273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7878a7cedac67dc4bb1180a98df4466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRigidBody: {fileID: 0}
   animator: {fileID: 0}
-  movement: {fileID: 0}
-  pickObjects: {fileID: 0}
   overlapBoxSize: {x: 0, y: 0}
   rayPunch: {fileID: 0}
   layerMask:
@@ -2479,7 +2474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &460072939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,6 +2492,7 @@ MonoBehaviour:
   animator: {fileID: 322351935}
   enemyCollider: {fileID: 0}
   rb: {fileID: 0}
+  enemyAI: {fileID: 0}
 --- !u!114 &460072940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,20 +2505,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5723cc0ef36f749bdc435c6950467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevelUpSystem: {fileID: 750219468}
-  player: {fileID: 750219473}
-  skillpointStartFlight: {fileID: 1236814093}
   rb2d: {fileID: 460072942}
-  characherController: {fileID: 750219472}
   boxCollider: {fileID: 460072943}
   animator: {fileID: 322351935}
-  knockDownEffect: {fileID: 353935034}
   punchRecoilForce: 0.3
   knockDownRecoilForce: 2
   knockDownForceByWeapon: 3
+  skillpointStartFlight: {fileID: 1236814093}
+  knockDownEffect: {fileID: 353935034}
   coinPrefab: {fileID: 8588110643872551415, guid: fb8a229f24a503c43a03a81f56103a4d, type: 3}
   skillPointPrefab: {fileID: 7868008315413214474, guid: 4b5e77123f2788b479c8443eee8260b4, type: 3}
   coinAmount: 1
+  player: {fileID: 750219473}
 --- !u!114 &460072941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2537,7 +2531,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 750219473}
   spriteRenderer: {fileID: 322351937}
-  characterMovement: {fileID: 750219471}
   rb2d: {fileID: 460072942}
   animator: {fileID: 322351935}
   attackDistance: 1.8
@@ -2549,6 +2542,7 @@ MonoBehaviour:
   idleAction: 0
   isAttacking: 0
   canAttack: 1
+  isFlip: 0
 --- !u!50 &460072942
 Rigidbody2D:
   serializedVersion: 4
@@ -3492,21 +3486,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d799fda9c9da41c41ba015c22896732c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 624913679}
-  weaponScript: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  controller: {fileID: 624913679}
   pickObjectsTest: {fileID: 0}
   jumpButton: 32
   punchButton: 0
   kickButton: 0
-  horizontalMove: 0
-  verticalMove: 0
+  jumpKickButton: 0
   isMoving: 1
   isJumping: 1
   isAttacking: 0
   isRunning: 0
   isAttackingWithWeapon: 0
   isRunningWithWeapon: 0
+  horizontalMove: 0
+  verticalMove: 0
 --- !u!114 &624913679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3519,10 +3513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7878a7cedac67dc4bb1180a98df4466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRigidBody: {fileID: 1396656051}
   animator: {fileID: 0}
-  movement: {fileID: 0}
-  pickObjects: {fileID: 0}
   overlapBoxSize: {x: 0, y: 0}
   rayPunch: {fileID: 0}
   layerMask:
@@ -4009,7 +4000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect: {fileID: 0}
   storeBox: {fileID: 1885221080}
-  playerRigidbody: {fileID: 1161089126}
 --- !u!114 &736294728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,9 +4052,9 @@ GameObject:
   - component: {fileID: 750219469}
   - component: {fileID: 750219468}
   - component: {fileID: 750219467}
+  - component: {fileID: 750219474}
   - component: {fileID: 750219466}
   - component: {fileID: 750219465}
-  - component: {fileID: 750219474}
   m_Layer: 7
   m_Name: Player Test
   m_TagString: Player
@@ -4159,7 +4149,7 @@ MonoBehaviour:
   boxCollider: {fileID: 750219465}
   storeDialogueBox: {fileID: 1885221080}
   characterMovement: {fileID: 750219471}
-  rigidbody: {fileID: 750219466}
+  enterStoreButton: 116
 --- !u!114 &750219468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4173,11 +4163,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
+  playerCollider: {fileID: 750219465}
+  coinText: {fileID: 847502756}
   currentSkillPoints: 0
   skillPointsToNextLevel: 100
-  playerCollider: {fileID: 750219465}
-  currentCoinPrice: 0
-  coinText: {fileID: 847502756}
 --- !u!114 &750219469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,6 +4182,8 @@ MonoBehaviour:
   playerCollider: {fileID: 750219465}
   characterMovement: {fileID: 750219471}
   animator: {fileID: 1402858}
+  pickUpObjectButton: 101
+  throwObjectButton: 120
   canPickUp: 1
   canThrow: 0
 --- !u!114 &750219471
@@ -4207,21 +4198,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d799fda9c9da41c41ba015c22896732c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 750219472}
-  weaponScript: {fileID: 1797164857}
   spriteRenderer: {fileID: 1402857}
+  controller: {fileID: 750219472}
   pickObjectsTest: {fileID: 750219469}
   jumpButton: 32
   punchButton: 99
   kickButton: 114
-  horizontalMove: 0
-  verticalMove: 0
+  jumpKickButton: 114
   isMoving: 1
   isJumping: 0
   isAttacking: 1
   isRunning: 1
   isAttackingWithWeapon: 0
   isRunningWithWeapon: 0
+  horizontalMove: 0
+  verticalMove: 0
 --- !u!114 &750219472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4234,10 +4225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7878a7cedac67dc4bb1180a98df4466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRigidBody: {fileID: 750219466}
   animator: {fileID: 1402858}
-  movement: {fileID: 750219471}
-  pickObjects: {fileID: 0}
   overlapBoxSize: {x: 1.2, y: 0.4}
   rayPunch: {fileID: 1214265477}
   layerMask:
@@ -4287,7 +4275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af3a57f28eb5c44db5f2801f87c7c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoilPower: 0.5
   collider: {fileID: 750219465}
+  rb2d: {fileID: 750219466}
   animator: {fileID: 1402858}
   stats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
   test: {fileID: 1753812397}
@@ -4841,7 +4831,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &918281831
 Transform:
@@ -5551,7 +5541,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1123225162
 Transform:
@@ -5797,7 +5787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1125871971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,20 +5800,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5723cc0ef36f749bdc435c6950467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevelUpSystem: {fileID: 750219468}
-  player: {fileID: 750219473}
-  skillpointStartFlight: {fileID: 56161638}
   rb2d: {fileID: 1125871973}
-  characherController: {fileID: 750219472}
   boxCollider: {fileID: 1125871974}
   animator: {fileID: 20008320}
-  knockDownEffect: {fileID: 1716587678}
   punchRecoilForce: 0.3
   knockDownRecoilForce: 2
   knockDownForceByWeapon: 3
+  skillpointStartFlight: {fileID: 56161638}
+  knockDownEffect: {fileID: 1716587678}
   coinPrefab: {fileID: 8588110643872551415, guid: fb8a229f24a503c43a03a81f56103a4d, type: 3}
   skillPointPrefab: {fileID: 7868008315413214474, guid: 4b5e77123f2788b479c8443eee8260b4, type: 3}
   coinAmount: 1
+  player: {fileID: 750219473}
 --- !u!114 &1125871972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5838,7 +5826,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 750219473}
   spriteRenderer: {fileID: 20008319}
-  characterMovement: {fileID: 750219471}
   rb2d: {fileID: 1125871973}
   animator: {fileID: 20008320}
   attackDistance: 1.8
@@ -5850,6 +5837,7 @@ MonoBehaviour:
   idleAction: 0
   isAttacking: 0
   canAttack: 1
+  isFlip: 1
 --- !u!50 &1125871973
 Rigidbody2D:
   serializedVersion: 4
@@ -5958,6 +5946,7 @@ MonoBehaviour:
   animator: {fileID: 20008320}
   enemyCollider: {fileID: 0}
   rb: {fileID: 0}
+  enemyAI: {fileID: 0}
 --- !u!1 &1145471721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6105,21 +6094,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d799fda9c9da41c41ba015c22896732c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1161089128}
-  weaponScript: {fileID: 1797164857}
   spriteRenderer: {fileID: 877075513}
+  controller: {fileID: 1161089128}
   pickObjectsTest: {fileID: 0}
   jumpButton: 32
   punchButton: 99
   kickButton: 114
-  horizontalMove: 0
-  verticalMove: 0
+  jumpKickButton: 0
   isMoving: 1
   isJumping: 0
   isAttacking: 1
   isRunning: 0
   isAttackingWithWeapon: 0
   isRunningWithWeapon: 0
+  horizontalMove: 0
+  verticalMove: 0
 --- !u!114 &1161089128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6132,10 +6121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7878a7cedac67dc4bb1180a98df4466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRigidBody: {fileID: 1161089126}
   animator: {fileID: 877075514}
-  movement: {fileID: 1161089127}
-  pickObjects: {fileID: 0}
   overlapBoxSize: {x: 2.5, y: 0.1}
   rayPunch: {fileID: 2110713729}
   layerMask:
@@ -6227,7 +6213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af3a57f28eb5c44db5f2801f87c7c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoilPower: 0
   collider: {fileID: 1161089131}
+  rb2d: {fileID: 0}
   animator: {fileID: 877075514}
   stats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
   test: {fileID: 1753812397}
@@ -6247,6 +6235,8 @@ MonoBehaviour:
   playerCollider: {fileID: 1161089131}
   characterMovement: {fileID: 1161089127}
   animator: {fileID: 877075514}
+  pickUpObjectButton: 0
+  throwObjectButton: 0
   canPickUp: 1
   canThrow: 0
 --- !u!114 &1161089134
@@ -6262,11 +6252,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 106306d04b4e5df4d86146bdec7ca654, type: 2}
+  playerCollider: {fileID: 1161089131}
+  coinText: {fileID: 847502756}
   currentSkillPoints: 0
   skillPointsToNextLevel: 100
-  playerCollider: {fileID: 1161089131}
-  currentCoinPrice: 0
-  coinText: {fileID: 847502756}
 --- !u!114 &1161089135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6282,7 +6271,7 @@ MonoBehaviour:
   boxCollider: {fileID: 1161089131}
   storeDialogueBox: {fileID: 1885221080}
   characterMovement: {fileID: 1161089127}
-  rigidbody: {fileID: 1161089126}
+  enterStoreButton: 0
 --- !u!1 &1214265476
 GameObject:
   m_ObjectHideFlags: 0
@@ -8555,7 +8544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1690266790
 Rigidbody2D:
   serializedVersion: 4
@@ -8661,7 +8650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 750219473}
   spriteRenderer: {fileID: 10921117}
-  characterMovement: {fileID: 750219471}
   rb2d: {fileID: 1690266790}
   animator: {fileID: 10921118}
   attackDistance: 2.2
@@ -8673,6 +8661,7 @@ MonoBehaviour:
   idleAction: 0
   isAttacking: 0
   canAttack: 0
+  isFlip: 1
   canChase: 0
   isChasing: 0
   followDistance: 5
@@ -8690,17 +8679,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e5409eccd656c4390dfc7bc25196ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 1690266791}
-  playerLevelUpSystem: {fileID: 750219468}
   player: {fileID: 750219473}
-  skillpointStartFlight: {fileID: 768538495}
+  playerCollider: {fileID: 1690266791}
   rb2d: {fileID: 1690266790}
-  characherController: {fileID: 750219472}
   animator: {fileID: 10921118}
-  knockDownEffect: {fileID: 1800236542}
   punchRecoilForce: 0.3
   knockDownRecoilForce: 2
   knockDownForceByWeapon: 3
+  skillpointStartFlight: {fileID: 768538495}
+  knockDownEffect: {fileID: 1800236542}
   coinPrefab: {fileID: 8588110643872551415, guid: fb8a229f24a503c43a03a81f56103a4d, type: 3}
   skillPointPrefab: {fileID: 7868008315413214474, guid: 4b5e77123f2788b479c8443eee8260b4, type: 3}
   coinAmount: 1
@@ -8721,7 +8708,7 @@ MonoBehaviour:
   animator: {fileID: 10921118}
   enemyCollider: {fileID: 0}
   rb: {fileID: 0}
-  enemyAi: {fileID: 0}
+  enemyAI: {fileID: 0}
 --- !u!4 &1716587676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 453802, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
@@ -9662,7 +9649,7 @@ GameObject:
   - component: {fileID: 1959218723}
   m_Layer: 0
   m_Name: ComboEndTrigger
-  m_TagString: WeakAttack
+  m_TagString: KnockDownPunch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10119,8 +10106,6 @@ GameObject:
   - component: {fileID: 2035229696}
   - component: {fileID: 2035229695}
   - component: {fileID: 2035229698}
-  - component: {fileID: 2035229699}
-  - component: {fileID: 2035229700}
   m_Layer: 8
   m_Name: Pipe
   m_TagString: Pipe
@@ -10267,32 +10252,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2035229699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035229694}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e106a1529a8084497fa2f138fb9959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 2035229696}
-  playerSpriteRenderer: {fileID: 1402857}
---- !u!114 &2035229700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035229694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de03faa998ed87e4c995fa10385357e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2053036265
 GameObject:
   m_ObjectHideFlags: 0

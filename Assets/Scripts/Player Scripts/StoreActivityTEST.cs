@@ -7,14 +7,14 @@ public class StoreActivityTEST : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private GameObject storeDialogueBox;
     [SerializeField] private CharacterMovement characterMovement;
-    [SerializeField] private new Rigidbody2D rigidbody;
+    [SerializeField] private KeyCode enterStoreButton;
+    readonly GlobalStringVariables variables = new();
     void Start()
     {
-        boxCollider.OnCollisionStay2DAsObservable().Where(x => x.gameObject.CompareTag("Store") && Input.GetKey(KeyCode.T)).Subscribe(_ => 
+        boxCollider.OnTriggerStay2DAsObservable().Where(x => x.CompareTag(variables.StoreTag) && Input.GetKey(enterStoreButton)).Subscribe(_ => 
         {
             storeDialogueBox.SetActive(true);
             characterMovement.isMoving = false;
-            rigidbody.bodyType = RigidbodyType2D.Static;
         });
     }
 }

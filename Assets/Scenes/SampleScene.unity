@@ -2474,7 +2474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &460072939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5787,7 +5787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1125871971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8544,7 +8544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1690266790
 Rigidbody2D:
   serializedVersion: 4
@@ -9201,8 +9201,8 @@ MonoBehaviour:
   weaponSpriteRenderer: {fileID: 2035229696}
   shadowSpiteRenderer: {fileID: 1797164854}
   characterMovement: {fileID: 750219471}
-  pipePositionOnPlayer: {x: 1, y: 1}
-  shadowPositionOnPlayer: {x: 1.05, y: 0}
+  pipePositionOnPlayer: {x: 1.55, y: 0.83}
+  shadowPositionOnPlayer: {x: 1.55, y: 0}
   pipeLeftThrowDirection: {x: -3, y: -2}
   pipeRightThrowDirection: {x: 3, y: -2}
   shadowLeftThrowDirection: {x: -3, y: 0}

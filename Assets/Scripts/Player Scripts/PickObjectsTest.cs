@@ -59,9 +59,10 @@ public class PickObjectsTest : MonoBehaviour
     private async void ThrowObject()
     {
         animator.Play(variables.ThrowHash);
-        await Task.Delay(200);
+        await Task.Delay(300);
         ThrowItem?.Invoke();
         canPickUp = true;
+        canThrow = false;
         characterMovement.isAttacking = true;
         animator.SetBool(variables.IdleWithWeapon, false);
         animator.SetBool(variables.WalkingWithWeapon, false);

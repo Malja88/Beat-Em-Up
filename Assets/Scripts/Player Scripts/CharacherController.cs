@@ -5,6 +5,7 @@ public class CharacherController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     readonly GlobalStringVariables variables = new();
+    private Controls controls;
 
     [Header("Player Attack Settings")]
     [SerializeField] private Vector2 overlapBoxSize;
@@ -25,18 +26,16 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private float runningSpeed;
     [SerializeField] private float runningWithWeaponSpeed;
     [SerializeField] private PlayerStats playerStats;  
-    [SerializeField] private float doubleTapTimeThreshold;
-    [SerializeField] private float doubleTapTimeRunThreshold;
     private Vector3 currentVelocity = Vector3.zero;
     private bool faceRight = true;
-    private float lastTapTime = 0f;
-    private float lastTapRunTime = 0f;
     private float currentHorizontalSpeed;
 
     private void Start()
     {
         currentHorizontalSpeed = playerStats.horizontalSpeed;
         currentComboAttackTimer = comboAttackTimer;
+        controls = new Controls();
+        controls.Player.Enable();
     }
 
     public void Move(float hMove, float vMove)
@@ -44,10 +43,12 @@ public class CharacherController : MonoBehaviour
         //Vector3 targetVelocity = new(hMove * currentHorizontalSpeed, vMove * playerStats.verticalSpeed);
         //characterRigidBody.velocity = Vector3.SmoothDamp(characterRigidBody.velocity, targetVelocity, ref currentVelocity, moveSmooth);
 
-        animator.SetBool(variables.Walk, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
-        Vector3 moveDirection = new Vector3(hMove, vMove, 0f).normalized;
+        Vector2 inputVector = controls.Player.Movement.ReadValue<Vector2>();
+        animator.SetBool(variables.Walk, Mathf.Abs(inputVector.x) >= 0.1f || Mathf.Abs(inputVector.y) >= 0.1f);
+        Vector3 moveDirection = new Vector3(inputVector.x, inputVector.y, 0f).normalized;
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
+
         if (hMove > 0 && !faceRight || hMove < 0 && faceRight)
         {
             Flip();
@@ -56,7 +57,8 @@ public class CharacherController : MonoBehaviour
 
     public void MoveWithWeapon(float hMove, float vMove)
     {
-        animator.SetBool(variables.WalkingWithWeapon, Mathf.Abs(hMove) >= 1 || Mathf.Abs(vMove) >= 1);
+        Vector2 inputVector = controls.Player.Movement.ReadValue<Vector2>();
+        animator.SetBool(variables.WalkingWithWeapon, Mathf.Abs(inputVector.x) >= 0.1f || Mathf.Abs(inputVector.y) >= 0.1f);
     }
 
     public void Flip()
@@ -131,12 +133,8 @@ public class CharacherController : MonoBehaviour
 
     public void Run()
     {
-        if (Time.time - lastTapTime < doubleTapTimeThreshold)
-        {
-            currentHorizontalSpeed *= runningSpeed;
-            animator.SetBool(variables.RunHash, true);
-        }
-        lastTapTime = Time.time;
+        currentHorizontalSpeed = runningSpeed;
+        animator.SetBool(variables.RunHash, true);
     }
 
     public void DisableRun()
@@ -152,12 +150,8 @@ public class CharacherController : MonoBehaviour
 
     public void RunWithWeapon()
     {
-        if ((Time.time - lastTapRunTime) < doubleTapTimeRunThreshold)
-        {
-            currentHorizontalSpeed *= runningWithWeaponSpeed;
-            animator.SetBool(variables.RunWithWeapon, true);
-        }
-        lastTapRunTime = Time.time;
+        currentHorizontalSpeed = runningSpeed;
+        animator.SetBool(variables.RunWithWeapon, true);
     }
 
     public void DisableRunWithWeapon()

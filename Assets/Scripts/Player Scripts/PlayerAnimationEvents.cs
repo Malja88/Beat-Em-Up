@@ -23,7 +23,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         characterMovement.isJumping = false;
         characterMovement.isAttacking = true;
-        characterMovement.isRunning = true;
+        characterMovement.isRunning = false;
         pickObjects.canThrow = true;
     }
 

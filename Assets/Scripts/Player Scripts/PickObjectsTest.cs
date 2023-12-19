@@ -68,6 +68,6 @@ public class PickObjectsTest : MonoBehaviour
         animator.SetBool(variables.WalkingWithWeapon, false);
         characterMovement.isAttackingWithWeapon = false;
         characterMovement.isRunningWithWeapon = false;
-        characterMovement.isRunning = true;
+        //characterMovement.isRunning = true;
     }
 }

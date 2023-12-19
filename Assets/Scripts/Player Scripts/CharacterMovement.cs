@@ -1,10 +1,15 @@
+using System;
 using UniRx;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Body Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator animator;
 
     [Header("Script Dependency")]
     [SerializeField] private CharacherController controller;
@@ -15,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private KeyCode punchButton;
     [SerializeField] private KeyCode kickButton;
     [SerializeField] private KeyCode jumpKickButton;
+    private Controls controls;
 
     [Header("Player Behaviours")]
     public bool isMoving;
@@ -25,6 +31,19 @@ public class CharacterMovement : MonoBehaviour
     public bool isRunningWithWeapon;
     readonly GlobalStringVariables variables = new();
     [HideInInspector] public float horizontalMove, verticalMove;
+
+    private float lastTapTime = 0f;
+    [SerializeField] private float doubleTapTimeThreshold;
+
+    private void Awake()
+    {
+        controls = new Controls();
+        controls.Player.Enable();
+        controls.Player.Run.started += Run_performed;
+        controls.Player.Run.canceled += Run_canceled;
+    }
+
+
 
     private void Start()
     {
@@ -45,12 +64,32 @@ public class CharacterMovement : MonoBehaviour
         });
     }
 
+    private void Run_canceled(InputAction.CallbackContext obj)
+    {
+        isRunning = false;
+        controller.DisableRun();
+        controller.DisableRunWithWeapon();
+    }
+
+    private void Run_performed(InputAction.CallbackContext obj)
+    {
+        float currentTime = Time.time;
+        if (currentTime - lastTapTime < doubleTapTimeThreshold)
+        {
+            isRunning = true;
+        }
+        if (currentTime - lastTapTime < doubleTapTimeThreshold && isRunningWithWeapon)
+        {
+            controller.RunWithWeapon();
+            isRunning = false;
+        }
+        lastTapTime = currentTime;
+    }
     private void CharacterMove()
     {
         if (!isMoving) return;
-        horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
-        verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
-        controller.Move(horizontalMove, verticalMove);
+        Vector2 inputVector = controls.Player.Movement.ReadValue<Vector2>();
+        controller.Move(inputVector.x, inputVector.y);
     }
 
     private void CharacterMoveWithWeapon()
@@ -58,9 +97,8 @@ public class CharacterMovement : MonoBehaviour
         if (!isMoving) return;
         if(!pickObjectsTest.canPickUp)
         {
-            horizontalMove = Input.GetAxisRaw(variables.HorizontalAxis);
-            verticalMove = Input.GetAxisRaw(variables.VerticalAxis);
-            controller.MoveWithWeapon(horizontalMove, verticalMove);
+            Vector2 inputVector = controls.Player.Movement.ReadValue<Vector2>();
+            controller.MoveWithWeapon(inputVector.x, inputVector.y);
         }
     }
 
@@ -120,28 +158,29 @@ public class CharacterMovement : MonoBehaviour
 
     private void CharacterRun()
     {
-        if(!isRunning) { return; }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            controller.Run();
-        }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            controller.DisableRun();
-        }
+        if(!isRunning) return; 
+        //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    controller.Run();
+        //}
+        //if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        //{
+        //    controller.DisableRun();
+        //}
+        controller.Run();
     }
 
     private void CharacterRunWithWeapon()
     {
         if (!isRunningWithWeapon) return;
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            controller.RunWithWeapon();
-        }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            controller.DisableRunWithWeapon();
-        }
+        //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    controller.RunWithWeapon();
+        //}
+        //if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        //{
+        //    controller.DisableRunWithWeapon();
+        //}
     }
 
     private void CharacterItemPunch()

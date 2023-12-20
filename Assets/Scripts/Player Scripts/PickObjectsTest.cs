@@ -11,21 +11,25 @@ public class PickObjectsTest : MonoBehaviour
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private Animator animator;
 
-    [Header("Interactable Object Buttons")]
-    [SerializeField] private KeyCode pickUpObjectButton;
-    [SerializeField] private KeyCode throwObjectButton;
-
     [Header("Player Behaviour with Interactable Objects")]
     [SerializeField] public bool canPickUp;
     [SerializeField] public bool canThrow;
+
     readonly GlobalStringVariables variables = new();
+    private Controls controls;
     public static event Action ThrowItem;
+
+    private void Awake()
+    {
+        controls = new Controls();
+        controls.Player.Enable();
+    }
     void Start()
     {
         playerCollider.OnTriggerStay2DAsObservable().Subscribe(_ =>
         {
             if (!canPickUp) { return; }
-            if (Input.GetKey(pickUpObjectButton) && _.CompareTag(variables.PickObjectTag))
+            if (controls.Player.PickUp.triggered && _.CompareTag(variables.PickObjectTag))
             {
                 if (_.TryGetComponent(out WeaponScriptTest weaponScript))
                 {
@@ -38,7 +42,7 @@ public class PickObjectsTest : MonoBehaviour
         Observable.EveryUpdate().Subscribe(_ =>
         {
             if (!canThrow) { return; }
-            if ((Input.GetKeyUp(throwObjectButton)))
+            if (controls.Player.PickUp.triggered)
             {
                 ThrowObject();
             }

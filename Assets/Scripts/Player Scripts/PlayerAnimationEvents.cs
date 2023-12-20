@@ -13,6 +13,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void JumpingOn()
     {
         characterMovement.isJumping = true;
+        characterMovement.isJumpKick = true;
         characterMovement.isAttacking = false;
         characterMovement.isAttackingWithWeapon = false;
         characterMovement.isRunning = false;
@@ -22,6 +23,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void JumpingOff()
     {
         characterMovement.isJumping = false;
+        characterMovement.isJumpKick = false;
         characterMovement.isAttacking = true;
         characterMovement.isRunning = false;
         pickObjects.canThrow = true;
@@ -46,11 +48,13 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void LockAttack()
     {
         characterMovement.isAttacking = false;
+        characterMovement.isJumping = true;
     }
 
     public void UnlockAttack()
     {
         characterMovement.isAttacking = true;
+        characterMovement.isJumping = false;
     }
 
     public void IsMovingOff()

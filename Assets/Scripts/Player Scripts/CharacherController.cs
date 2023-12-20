@@ -17,7 +17,7 @@ public class CharacherController : MonoBehaviour
     [SerializeField] private float currentComboAttackTimer;
     [SerializeField] private float hitRayDistance;
     [SerializeField] private bool timerToResetCombo;
-    [SerializeField] public bool isHit;
+    private bool isHit;
  
 
     [Header("Player Moving Speed Settings")]
@@ -49,7 +49,7 @@ public class CharacherController : MonoBehaviour
         Vector3 targetPosition = transform.position + moveDirection * currentHorizontalSpeed;
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmooth * Time.deltaTime);
 
-        if (hMove > 0 && !faceRight || hMove < 0 && faceRight)
+        if (inputVector.x > 0 && !faceRight || inputVector.x < 0 && faceRight)
         {
             Flip();
         }

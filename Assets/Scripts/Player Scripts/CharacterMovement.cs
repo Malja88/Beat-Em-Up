@@ -1,25 +1,16 @@
-using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Body Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Animator animator;
 
     [Header("Script Dependency")]
     [SerializeField] private CharacherController controller;
     [SerializeField] private PickObjectsTest pickObjectsTest;
 
-    [Header("Input Buttons")]
-    [SerializeField] private KeyCode jumpButton;
-    [SerializeField] private KeyCode punchButton;
-    [SerializeField] private KeyCode kickButton;
-    [SerializeField] private KeyCode jumpKickButton;
     private Controls controls;
 
     [Header("Player Behaviours")]
@@ -29,9 +20,9 @@ public class CharacterMovement : MonoBehaviour
     public bool isRunning;
     public bool isAttackingWithWeapon;
     public bool isRunningWithWeapon;
-    readonly GlobalStringVariables variables = new();
-    [HideInInspector] public float horizontalMove, verticalMove;
+    public bool isJumpKick;
 
+    [Header("Running Behaviour")]
     private float lastTapTime = 0f;
     [SerializeField] private float doubleTapTimeThreshold;
 
@@ -41,26 +32,23 @@ public class CharacterMovement : MonoBehaviour
         controls.Player.Enable();
         controls.Player.Run.started += Run_performed;
         controls.Player.Run.canceled += Run_canceled;
+        controls.Player.Jump.performed += Jump_performed;
+        controls.Player.Punch.performed += Punch_performed;
+        controls.Player.ItemPunch.performed += ItemPunch_performed;
+        controls.Player.Kick.performed += Kick_performed;
+        controls.Player.JumpKick.performed += JumpKick_performed;
     }
-
-
 
     private void Start()
     {
         Observable.EveryUpdate().Subscribe(_ =>
         {
             CharacterMove();
-            CharacterJump();
-            CharacterPunch();
             ComboTimer();
             CharacterRun();
-            CharacterItemPunch();
-            CharacterKick();
             DynamicSpriteRender();
             CharacterRunWithWeapon();
             CharacterMoveWithWeapon();
-            CharacterJumpKick();
-            CharacterJumpWithWeapon();
         });
     }
 
@@ -85,6 +73,34 @@ public class CharacterMovement : MonoBehaviour
         }
         lastTapTime = currentTime;
     }
+
+    private void Jump_performed(InputAction.CallbackContext obj)
+    {
+        if (isJumping) return;      
+            controller.Jump();
+
+        if (!isJumping && !pickObjectsTest.canPickUp)
+        {
+            controller.JumpWithWeapon();
+        }
+    }
+
+    private void Punch_performed(InputAction.CallbackContext obj)
+    {
+        if (!isAttacking) return;
+        controller.Punch();
+    }
+
+    private void ItemPunch_performed(InputAction.CallbackContext obj)
+    {
+        if (!isAttackingWithWeapon) return;
+        if (!pickObjectsTest.canPickUp)
+        {
+            controller.ItemPunch();
+            isAttacking = false;
+        }
+    }
+
     private void CharacterMove()
     {
         if (!isMoving) return;
@@ -102,53 +118,18 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CharacterJump()
+    private void JumpKick_performed(InputAction.CallbackContext obj)
     {
-        if (isJumping || !Input.GetKeyDown(jumpButton) && !Input.GetButtonDown(variables.Jump)) return;
-        controller.Jump();
-    }
-
-    private void CharacterJumpWithWeapon()
-    {
-        if (!isJumping && !pickObjectsTest.canPickUp && Input.GetButtonDown(variables.Jump))
-        {
-            controller.JumpWithWeapon();
-        }
-    }
-
-    private void CharacterJumpKick()
-    {
-        if(isJumping && Input.GetKeyDown(jumpKickButton))
+        if (isJumpKick)
         {
             controller.JumpKick();
-            isJumping = true;
-        }       
-    }
-
-    private void CharacterPunch()
-    {
-        if (!isAttacking) return;
-        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch))
-        {
-            controller.Punch();
-        }
-        else if (Input.GetKeyUp(punchButton) || Input.GetButtonUp(variables.Punch))
-        {
-            controller.isHit = false;
         }
     }
 
-    private void CharacterKick()
+    private void Kick_performed(InputAction.CallbackContext obj)
     {
         if (!isAttacking) return;
-        if (Input.GetKeyDown(kickButton) || Input.GetButtonDown(variables.Kick))
-        {
-            controller.Kick();
-        }
-        else if (Input.GetKeyUp(kickButton) || Input.GetButtonUp(variables.Kick))
-        {
-            controller.isHit = false;
-        }
+        controller.Kick();
     }
 
     private void ComboTimer()
@@ -159,38 +140,12 @@ public class CharacterMovement : MonoBehaviour
     private void CharacterRun()
     {
         if(!isRunning) return; 
-        //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    controller.Run();
-        //}
-        //if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-        //{
-        //    controller.DisableRun();
-        //}
         controller.Run();
     }
 
     private void CharacterRunWithWeapon()
     {
         if (!isRunningWithWeapon) return;
-        //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    controller.RunWithWeapon();
-        //}
-        //if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-        //{
-        //    controller.DisableRunWithWeapon();
-        //}
-    }
-
-    private void CharacterItemPunch()
-    {
-        if (!isAttackingWithWeapon) return;
-        if (Input.GetKeyDown(punchButton) || Input.GetButtonDown(variables.Punch) && !pickObjectsTest.canPickUp)
-        {
-            controller.ItemPunch();
-            isAttacking = false;
-        }
     }
 
     private void DynamicSpriteRender()

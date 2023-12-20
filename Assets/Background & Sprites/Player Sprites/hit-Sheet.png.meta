@@ -1,0 +1,577 @@
+fileFormatVersion: 2
+guid: 7578b2c00e1abb54fa509cedcad8f558
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: hit-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 30
+        width: 44
+        height: 71
+      alignment: 9
+      pivot: {x: 0.28705388, y: 0.005278762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9748acc76b9febf41a6c6d93d3c1ac07
+      internalID: -1550829341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 30
+        width: 38
+        height: 70
+      alignment: 9
+      pivot: {x: 0.33233804, y: 0.008031409}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a4b30e92ec2e2745b94ef0ad5a54e58
+      internalID: 83052242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 14
+        width: 54
+        height: 85
+      alignment: 9
+      pivot: {x: 0.22932264, y: -0.0022045583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c708f2844321b0c44894af2b59356bf4
+      internalID: -1235392135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 21
+        width: 58
+        height: 83
+      alignment: 9
+      pivot: {x: 0.21568035, y: 0.00000020682094}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef0d3afd921710429db21a9cf21a35d
+      internalID: 1918076559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 30
+        width: 36
+        height: 68
+      alignment: 9
+      pivot: {x: 0.34906006, y: 0.011023662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abc58ad74c9584f4d977ebb21d57f737
+      internalID: 330292502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 25
+        width: 31
+        height: 57
+      alignment: 9
+      pivot: {x: 0.40328094, y: 0.000000033462257}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8973f33d228264bb68fc8b0a1b2f14
+      internalID: 1775030053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 9
+        width: 37
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66b8b0a260b58ba4e8fe0409866dce13
+      internalID: -1192832858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 35
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 049d428e9b9ea234e8eb945fb09cab7b
+      internalID: -252096732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 35
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8ff58b118bc42b449c3a03c94b888e6
+      internalID: -1521405453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 0
+        width: 45
+        height: 47
+      alignment: 9
+      pivot: {x: 0.35019225, y: 0.04413369}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d13035721e7e2479c102175c58b10f
+      internalID: 1722150585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 55
+        height: 49
+      alignment: 9
+      pivot: {x: 0.29728726, y: 0.037040766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79c0c541e1f53c34b8193d89850ea6fa
+      internalID: -1483059670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 0
+        width: 56
+        height: 49
+      alignment: 9
+      pivot: {x: 0.31016704, y: 0.03174922}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09705db7d93ada43858a23cd0835599
+      internalID: 1243605462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 47
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3620833, y: 0.03781245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5973f187cd6d8a4b9b47c3119715928
+      internalID: -1833866218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 0
+        width: 60
+        height: 48
+      alignment: 9
+      pivot: {x: 0.28825226, y: 0.03781245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c0c5f499e4d884ab0d19f9295505df
+      internalID: 1712702301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 0
+        width: 57
+        height: 47
+      alignment: 9
+      pivot: {x: 0.28620294, y: 0.03861697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a0a959c6826ea46b807aecaaf61afc
+      internalID: 2103857868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 0
+        width: 38
+        height: 44
+      alignment: 9
+      pivot: {x: 0.45890406, y: 0.03548915}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a77f9c5b814de34dba43f2825cb336d
+      internalID: -26336256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 0
+        width: 40
+        height: 45
+      alignment: 9
+      pivot: {x: 0.46746522, y: 0.040483914}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a9ee0754ac3a864d8db12be4328abe1
+      internalID: -674190025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 2
+        width: 35
+        height: 46
+      alignment: 9
+      pivot: {x: 0.44110632, y: 0.016295163}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e5a52b6fd4d0d4594951db30129795
+      internalID: 1931148729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 0
+        width: 43
+        height: 46
+      alignment: 9
+      pivot: {x: 0.42156556, y: 0.02444268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbd38ea726a7db54d9086a00007ebcb5
+      internalID: 996650383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      hit-Sheet_0: 1738406828
+      hit-Sheet_1: -1550829341
+      hit-Sheet_10: 1775030053
+      hit-Sheet_11: -1192832858
+      hit-Sheet_12: -252096732
+      hit-Sheet_13: -1521405453
+      hit-Sheet_14: 1722150585
+      hit-Sheet_15: -1483059670
+      hit-Sheet_16: 1243605462
+      hit-Sheet_17: -1833866218
+      hit-Sheet_18: 1712702301
+      hit-Sheet_19: 2103857868
+      hit-Sheet_2: 83052242
+      hit-Sheet_20: -26336256
+      hit-Sheet_21: -674190025
+      hit-Sheet_22: 1931148729
+      hit-Sheet_23: 1406851381
+      hit-Sheet_24: 996650383
+      hit-Sheet_3: -1235392135
+      hit-Sheet_4: 1918076559
+      hit-Sheet_5: 646351249
+      hit-Sheet_6: 624521591
+      hit-Sheet_7: 330292502
+      hit-Sheet_8: 334901423
+      hit-Sheet_9: 28226126
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

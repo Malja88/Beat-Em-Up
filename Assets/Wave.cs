@@ -7,5 +7,5 @@ using UnityEngine;
 public class Wave
 {
     public string waveName;
-    public int numberOfEnemies;
+    public EnemyAI[] typeOfEnemy;
 }

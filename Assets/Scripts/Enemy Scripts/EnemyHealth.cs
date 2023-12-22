@@ -13,12 +13,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private EnemyAI enemyAI;
 
     readonly GlobalStringVariables variables = new();
+    private EnemyWaveSystem enemyWaveSystem;
     void Awake()
     {
         enemyCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         enemyAI = GetComponent<EnemyAI>();
         currentHealth = maxHealth;
+        enemyWaveSystem = FindObjectOfType<EnemyWaveSystem>();
     }
 
     public virtual void TakeDamage(int damage)
@@ -38,5 +40,9 @@ public class EnemyHealth : MonoBehaviour
         enemyCollider.enabled = false;
         animator.Play(variables.EnemyDeath);
         Destroy(gameObject,1.8f);
+        if (enemyWaveSystem != null)
+        {
+            enemyWaveSystem.EnemyDefeated(GetComponent<EnemyAI>());
+        }
     }
 }

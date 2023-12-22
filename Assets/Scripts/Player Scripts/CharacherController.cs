@@ -133,8 +133,8 @@ public class CharacherController : MonoBehaviour
 
     public void Run()
     {
-        currentHorizontalSpeed = runningSpeed;
         animator.SetBool(variables.RunHash, true);
+        currentHorizontalSpeed = runningSpeed;       
     }
 
     public void DisableRun()
@@ -150,14 +150,14 @@ public class CharacherController : MonoBehaviour
 
     public void RunWithWeapon()
     {
-        currentHorizontalSpeed = runningSpeed;
         animator.SetBool(variables.RunWithWeapon, true);
+        currentHorizontalSpeed = runningSpeed;       
     }
 
     public void DisableRunWithWeapon()
     {
-        currentHorizontalSpeed = playerStats.horizontalSpeed;
         animator.SetBool(variables.RunWithWeapon, false);
+        currentHorizontalSpeed = playerStats.horizontalSpeed;      
     }
 }
 

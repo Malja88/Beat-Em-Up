@@ -23,26 +23,32 @@ public class EnemyWaveSystem : MonoBehaviour
                 currentWave = wave[currentWaveNumber];
                 SpawnWave();
                 WaveEnd();
-                Debug.Log(currentWaveNumber);
             }
-
-        });
-
-        
+        });     
     }
 
     private void SpawnWave()
     {
-        if (currentWave != null && currentWave.typeOfEnemy != null && startWave)
+        if (currentWave != null && startWave)
         {
-            //playerCamera.Follow = null;
             enemyCamera.Priority = 10;
             playerCamera.Priority = 0;
-            for (int i = 0; i < currentWave.typeOfEnemy.Length; i++)
+
+            // Spawn regular enemies
+            for (int i = 0; i < currentWave.regularEnemy.Count; i++)
             {
-                if (currentWave.typeOfEnemy[i] != null)
+                if (currentWave.regularEnemy[i] != null)
                 {
-                    currentWave.typeOfEnemy[i].enabled = true;
+                    currentWave.regularEnemy[i].enabled = true;
+                }
+            }
+
+            // Spawn strong enemies
+            for (int i = 0; i < currentWave.strongEnemy.Count; i++)
+            {
+                if (currentWave.strongEnemy[i] != null)
+                {
+                    currentWave.strongEnemy[i].enabled = true;
                 }
             }
         }
@@ -50,14 +56,24 @@ public class EnemyWaveSystem : MonoBehaviour
 
     private void WaveEnd()
     {
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (totalEnemies.Length <= 0 && startWave && currentWaveNumber < wave.Length)
+        if ((currentWave.regularEnemy.Count + currentWave.strongEnemy.Count) <= 0 && startWave && currentWaveNumber < wave.Length)
         {
             currentWaveNumber++;
             startWave = false;
-            //playerCamera.Follow = player;
             enemyCamera.Priority = 0;
             playerCamera.Priority = 10;
+        }
+    }
+
+    public void EnemyDefeated(EnemyAI enemy)
+    {
+        if (currentWave.regularEnemy.Contains(enemy))
+        {
+            currentWave.regularEnemy.Remove(enemy);
+        }
+        else if (currentWave.strongEnemy.Contains(enemy as StrongEnemyAi))
+        {
+            currentWave.strongEnemy.Remove(enemy as StrongEnemyAi);
         }
     }
 }

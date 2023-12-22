@@ -7,5 +7,6 @@ using UnityEngine;
 public class Wave
 {
     public string waveName;
-    public EnemyAI[] typeOfEnemy;
+    public List<EnemyAI> regularEnemy = new();
+    public List<StrongEnemyAi> strongEnemy = new();
 }

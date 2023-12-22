@@ -39,6 +39,7 @@ public class PickObjectsTest : MonoBehaviour
             }
         });
 
+
         Observable.EveryUpdate().Subscribe(_ =>
         {
             if (!canThrow) { return; }

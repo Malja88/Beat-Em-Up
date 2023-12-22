@@ -400,7 +400,7 @@ MonoBehaviour:
   randomXEnd: 2
   randomYStart: 2
   randomYEnd: -2
-  smoothSpeed: 0.5
+  smoothSpeed: 0.1
   wanderTime: 1.5
   coinRb: {fileID: 8488523658166687581}
   bouncePower: 3.5

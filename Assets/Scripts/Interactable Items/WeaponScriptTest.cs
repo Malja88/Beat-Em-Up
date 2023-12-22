@@ -182,6 +182,8 @@ public class WeaponScriptTest : MonoBehaviour
 
     private void DynamicSpriteBalance()
     {
-        weaponSpriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
+        int sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
+        weaponSpriteRenderer.sortingOrder = sortingOrder + 1;
+        shadowSpiteRenderer.sortingOrder = sortingOrder;
     }
 }

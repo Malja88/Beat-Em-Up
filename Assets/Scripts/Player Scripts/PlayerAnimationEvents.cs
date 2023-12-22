@@ -17,7 +17,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         characterMovement.isAttacking = false;
         characterMovement.isAttackingWithWeapon = false;
         characterMovement.isRunning = false;
-        pickObjects.canThrow = false;
+        //pickObjects.canThrow = false;
     }
 
     public void JumpingOff()
@@ -26,20 +26,21 @@ public class PlayerAnimationEvents : MonoBehaviour
         characterMovement.isJumpKick = false;
         characterMovement.isAttacking = true;
         characterMovement.isRunning = false;
-        pickObjects.canThrow = true;
+        //pickObjects.canThrow = true;
     }
 
     public void JumpingWithWeaponOn()
     {
-        characterMovement.isJumping = true;
+        //characterMovement.isJumping = true;
         characterMovement.isAttackingWithWeapon = false;
         characterMovement.isRunning = false;
         pickObjects.canThrow = false;
+        characterMovement.isAttacking = false;
     }
 
     public void JumpingWithWeaponOff()
     {
-        characterMovement.isJumping = false;
+        //characterMovement.isJumping = false;
         characterMovement.isAttackingWithWeapon = true;
         characterMovement.isRunning = false;
         pickObjects.canThrow = true;

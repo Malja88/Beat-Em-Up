@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bc29de492875d4b4d8fa602d912db2da, type: 2}
-  m_sharedMaterial: {fileID: -7470241632979586545, guid: bc29de492875d4b4d8fa602d912db2da, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bcc8047daee9fe14b8c6e1f2b7f27c7b, type: 2}
+  m_sharedMaterial: {fileID: -2769453168622300129, guid: bcc8047daee9fe14b8c6e1f2b7f27c7b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.6
-  m_fontSizeBase: 0.6
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5743873175032796216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,5 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa65872e6f5d9284696997a46bcf57fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: {fileID: 0}
   numberText: {fileID: 3034870742677294514}
+  playerLevelUpSystem: {fileID: 0}
+  skillPoint: 0

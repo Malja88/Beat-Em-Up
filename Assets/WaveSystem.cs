@@ -3,10 +3,15 @@ using UnityEngine;
 using Cinemachine;
 using System;
 using UniRx;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class EnemyWaveSystem : MonoBehaviour
 {
     [SerializeField] private Wave[] wave;
+    [SerializeField] private GameObject[] cameraBorders;
+    [SerializeField] private GameObject goSign;
+    [SerializeField] private Transform enemyCameraPoint;
     private Wave currentWave;
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private CinemachineVirtualCamera enemyCamera;
@@ -14,6 +19,13 @@ public class EnemyWaveSystem : MonoBehaviour
     private int currentWaveNumber;
     public bool startWave;
 
+    [Serializable]
+    public class Wave
+    {
+        public string waveName;
+        public List<EnemyAI> regularEnemy = new();
+        public List<StrongEnemyAi> strongEnemy = new();
+    }
     private void Start()
     {
         Observable.EveryUpdate().Subscribe(_ => 
@@ -51,17 +63,30 @@ public class EnemyWaveSystem : MonoBehaviour
                     currentWave.strongEnemy[i].enabled = true;
                 }
             }
+
+            for (int i = 0; i < cameraBorders.Length; i++)
+            {
+                cameraBorders[i].SetActive(true);
+            }
         }
     }
 
-    private void WaveEnd()
+    private async void WaveEnd()
     {
         if ((currentWave.regularEnemy.Count + currentWave.strongEnemy.Count) <= 0 && startWave && currentWaveNumber < wave.Length)
         {
+            goSign.SetActive(true);
             currentWaveNumber++;
             startWave = false;
             enemyCamera.Priority = 0;
             playerCamera.Priority = 10;
+            await Task.Delay(2000);
+            goSign.SetActive(false);
+            enemyCamera.transform.position = enemyCameraPoint.position;
+            for (int i = 0; i < cameraBorders.Length; i++)
+            {
+                cameraBorders[i].SetActive(false);
+            }
         }
     }
 

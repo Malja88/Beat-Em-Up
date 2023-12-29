@@ -62,17 +62,18 @@ public class StrongEnemyDamage : MonoBehaviour
     {
         if (player.position.x < transform.position.x)
         {
+            strongEnemyAI.timer = 0;
             strongEnemyAI.canAttack = false;
             strongEnemyAI.isIdle = false;
             rb2d.AddForce(Vector2.right * punchPower, ForceMode2D.Impulse);
             await Task.Delay(300);
             strongEnemyAI.canAttack = true;
             strongEnemyAI.isIdle = true;
-            rb2d.velocity = Vector2.zero;
-            
+            rb2d.velocity = Vector2.zero;           
         }
         else
         {
+            strongEnemyAI.timer = 0;
             strongEnemyAI.canAttack = false;
             strongEnemyAI.isIdle = false;
             rb2d.AddForce(Vector2.left * punchPower, ForceMode2D.Impulse);

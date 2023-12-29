@@ -10,6 +10,7 @@ public class GlobalStringVariables
     public int PunchFinisherHash = Animator.StringToHash("Punch End Blow");
     public int RunHash = Animator.StringToHash("PlayerRun");
     public int HurtHash = Animator.StringToHash("Player Hurt");
+    public int KnockDownHash = Animator.StringToHash("Player KnockDown");
     public int ItemHitHash = Animator.StringToHash("PlayerWeaponHit");
     public int IdleWithWeapon = Animator.StringToHash("WeaponIdle");
     public int KickHash = Animator.StringToHash("Player Kick");
@@ -52,5 +53,6 @@ public class GlobalStringVariables
     public string PickObjectTag = "PickObject";
     public string CoinTag = "Coin";
     public string StoreTag = "Store";
+    public string HeavyAttack = "HeavyAttack";
     #endregion
 }

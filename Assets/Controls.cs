@@ -598,6 +598,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""74ffee44-4540-4a82-8740-e83f72c48add"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f43705b1-e5c0-4e20-a30c-18f8f8078511"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",

@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     [SerializeField] protected float idleMovementSpeed;
     [SerializeField] protected float interval;
     [SerializeField] protected float delay;
+    [SerializeField] protected float verticalAttackDistance;
 
     [HideInInspector] public float timer;
     [HideInInspector] public bool isIdle;
@@ -53,14 +54,14 @@ public class EnemyAI : MonoBehaviour, IAttack, IIde
     {
         if (!canAttack) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float distanceToPlayerX = Mathf.Abs(transform.position.x - player.position.x);
+        float distanceToPlayerY = Mathf.Abs(transform.position.y - player.position.y);
 
-        if (distanceToPlayer < attackDistance)
+        if (distanceToPlayerX < attackDistance && distanceToPlayerY < verticalAttackDistance)
         {
-            isIdle = false;
-            isAttacking = true;
             rb2d.velocity = Vector2.zero;
-            animator.SetBool(variables.EnemyWalk, false);
+            isIdle = false;
+            isAttacking = true;          
             AttackPlayer();
         }
         else

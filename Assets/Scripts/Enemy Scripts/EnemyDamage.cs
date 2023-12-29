@@ -19,6 +19,8 @@ public class EnemyDamage : MonoBehaviour
     [Header("Bonuses & Effects")]
     [SerializeField] private Transform skillpointStartFlight;
     [SerializeField] private ParticleSystem knockDownEffect;
+    [SerializeField] private ParticleSystem regularBloodSplash;
+    [SerializeField] private ParticleSystem knockDownBloodSplash;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject skillPointPrefab;
     [SerializeField] private int coinAmount;
@@ -36,7 +38,8 @@ public class EnemyDamage : MonoBehaviour
         {
             if(_.CompareTag(variables.KnockdownPunchTag))
             {
-                knockDownEffect.Play();
+                //knockDownEffect.Play();
+                knockDownBloodSplash.Play();
                 animator.Play(variables.EnemyKnockDown);
                 KnockBack(knockDownRecoilForce);
                 CoinSplash();
@@ -44,12 +47,14 @@ public class EnemyDamage : MonoBehaviour
             if(_.CompareTag(variables.PunchTag))
             {
                 animator.Play(variables.EnemyHurt);
+                regularBloodSplash.Play();
                 Instantiate(skillPointPrefab, skillpointStartFlight.position, Quaternion.identity);
                 KnockBack(punchRecoilForce);            
             }
             if(_.CompareTag(variables.WeaponTag))
             {
-                knockDownEffect.Play();
+                //knockDownEffect.Play();
+                knockDownBloodSplash.Play();
                 animator.Play(variables.EnemyKnockDown);
                 KnockBack(knockDownForceByWeapon);
                 CoinSplash();

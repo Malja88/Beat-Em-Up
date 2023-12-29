@@ -17,6 +17,7 @@ TagManager:
   - Border
   - Punch
   - KnockDownPunch
+  - HeavyAttack
   layers:
   - Default
   - TransparentFX

@@ -52,9 +52,10 @@ public class StrongEnemyAi : EnemyAI, IChase
         rb2d.velocity = direction * chasingSpeed;      
         animator.SetBool(variables.EnemyRun, true);
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float distanceToPlayerX = Mathf.Abs(transform.position.x - player.position.x);
+        float distanceToPlayerY = Mathf.Abs(transform.position.y - player.position.y);
 
-        if (distanceToPlayer <= attackDistance)
+        if (distanceToPlayerX < attackDistance && distanceToPlayerY < verticalAttackDistance)
         {
             isAttacking = true;
             isIdle = false;

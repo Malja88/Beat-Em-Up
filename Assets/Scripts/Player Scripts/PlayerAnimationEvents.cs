@@ -12,6 +12,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] private BoxCollider2D punchTrigger;
     public void JumpingOn()
     {
+        characterMovement.isMoving = true;
         characterMovement.isJumping = true;
         characterMovement.isJumpKick = true;
         characterMovement.isAttacking = false;
@@ -26,6 +27,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         characterMovement.isJumpKick = false;
         characterMovement.isAttacking = true;
         characterMovement.isRunning = false;
+        characterMovement.isMoving = true;
         //pickObjects.canThrow = true;
     }
 
@@ -87,4 +89,15 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         playerCollider.enabled = false;
     }
+
+    public void GetHurtOn()
+    {
+        playerCollider.enabled = characterMovement.isAttacking = characterMovement.isMoving = false;
+    }
+
+    public void GetHurtOff()
+    {
+        playerCollider.enabled = characterMovement.isAttacking = characterMovement.isMoving = true;
+    }
 }
+

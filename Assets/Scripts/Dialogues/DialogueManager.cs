@@ -12,6 +12,17 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject enemyDialogueBox;
+    [SerializeField] private CharacterMovement movement;
+    private void Update()
+    {
+        if (nextButton != null && nextButton.interactable)
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                DisplayNextSentence();
+            }
+        }
+    }
     public void StartDialogue(Dialogue dialogue)
     {
         nameText.text = dialogue.name;
@@ -31,7 +42,7 @@ public class DialogueManager : MonoBehaviour
         if (sentences.Count == 0)
         {
             EndDialogue();
-            enemyDialogueBox.SetActive(true);
+            //enemyDialogueBox.SetActive(true);
             return;
         }
 
@@ -49,7 +60,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            await Task.Delay(100);
+            await Task.Delay(50);
         }
         if (nextButton != null)
         {
@@ -60,5 +71,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogueBox.SetActive(false);
+        movement.isMoving = true;
+        movement.isAttacking = true;
     }
 }
